@@ -15,10 +15,9 @@
 *.xlsx
 *.xls
 
-# Carpeta de datos completa (excepto scripts)
-datos/*
-!datos/descargar_datos.py
-!datos/.gitkeep
+# Carpetas completas - los estudiantes las crean
+datos/
+ejercicios/
 
 # Archivos de salida
 resultados/

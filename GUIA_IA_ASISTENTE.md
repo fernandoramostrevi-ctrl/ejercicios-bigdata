@@ -18,7 +18,37 @@ La Inteligencia Artificial puede ayudarte a:
 
 ## Herramientas de IA Disponibles
 
-### 1. Claude Code (Antes Claude AI)
+### 1. Google Gemini (RECOMENDADO)
+
+**¿Qué es?** El asistente de IA de Google, completamente gratuito y muy potente para programación.
+
+**Cómo usarlo**:
+1. Ve a [gemini.google.com](https://gemini.google.com)
+2. Inicia sesión con tu cuenta de Google (Gmail)
+3. ¡Ya está! Comienza a hacer preguntas
+
+**Ventajas**:
+- ✅ Totalmente gratuito
+- ✅ No requiere registro especial (usa tu Gmail)
+- ✅ Excelente para código Python y Big Data
+- ✅ Puede analizar imágenes (útil si capturas errores)
+- ✅ Integración con Google Colab
+
+**Ejemplo de uso**:
+```
+Tú: "Estoy en el ejercicio 01_cargar_sqlite.py línea 23.
+     Explícame qué hace esta línea: engine = create_engine('sqlite:///taxi.db')"
+
+Gemini: "Esta línea crea una conexión a una base de datos SQLite.
+        - create_engine: función de SQLAlchemy para conectarse a bases de datos
+        - 'sqlite:///': indica que es una base SQLite (3 barras = archivo local)
+        - taxi.db: nombre del archivo de base de datos
+
+        Es como abrir un canal de comunicación con tu base de datos para poder
+        consultar y manipular los datos almacenados en ella."
+```
+
+### 2. Claude Code (Claude AI)
 
 **¿Qué es?** Un asistente de IA de Anthropic especializado en código y explicaciones técnicas.
 
@@ -27,18 +57,23 @@ La Inteligencia Artificial puede ayudarte a:
 2. Crea una cuenta gratuita
 3. Haz preguntas sobre el código
 
-**Ejemplo de uso**:
-```
-Tú: "Estoy en el ejercicio 01_cargar_sqlite.py línea 23.
-     Explícame qué hace esta línea: engine = create_engine('sqlite:///taxi.db')"
+**Ventajas**:
+- ✅ Muy bueno para explicaciones detalladas
+- ✅ Extensión de VS Code disponible
+- ✅ Excelente para razonamiento complejo
 
-Claude: "Esta línea crea una conexión a una base de datos SQLite.
-        - create_engine: función de SQLAlchemy para conectarse a bases de datos
-        - 'sqlite:///': indica que es una base SQLite (3 barras = archivo local)
-        - taxi.db: nombre del archivo de base de datos..."
-```
+### 3. ChatGPT
 
-### 2. GitHub Copilot
+**¿Qué es?** Chatbot de OpenAI para preguntas generales y explicaciones.
+
+**Cómo usarlo**:
+1. Ve a [chat.openai.com](https://chat.openai.com)
+2. Crea una cuenta gratuita
+3. Haz preguntas
+
+**Mejor para**: Conceptos generales, errores, explicaciones de Python básico.
+
+### 4. GitHub Copilot
 
 **¿Qué es?** Autocompleta código mientras escribes (como el autocompletado de Gmail, pero para código).
 
@@ -55,25 +90,25 @@ import pandas as pd
 df = pd.read_csv('datos.csv')
 ```
 
-### 3. ChatGPT
-
-**¿Qué es?** Chatbot de OpenAI para preguntas generales y explicaciones.
-
-**Cómo usarlo**:
-1. Ve a [chat.openai.com](https://chat.openai.com)
-2. Crea una cuenta gratuita
-3. Haz preguntas
-
-**Mejor para**: Conceptos generales, errores, explicaciones de Python básico.
-
-### 4. Otras Herramientas
+### 5. Otras Herramientas
 
 | Herramienta | Uso | Gratuita |
 |-------------|-----|----------|
-| **Google Bard** | Preguntas generales | ✅ Sí |
 | **Phind** | Búsqueda técnica con IA | ✅ Sí |
 | **Cursor AI** | Editor de código con IA integrada | ⚠️ Prueba gratis |
 | **CodeWhisperer** (Amazon) | Autocompletado (competencia de Copilot) | ✅ Sí |
+| **Perplexity AI** | Búsqueda con referencias | ✅ Sí |
+
+## Comparativa Rápida: ¿Cuál Usar?
+
+| Situación | Herramienta Recomendada |
+|-----------|------------------------|
+| **Primera vez con IA** | 🥇 **Gemini** (más fácil, usa tu Gmail) |
+| **Explicaciones detalladas** | Claude o Gemini |
+| **Autocompletado mientras escribes** | GitHub Copilot |
+| **Búsqueda técnica con fuentes** | Perplexity o Phind |
+| **Análisis de imágenes de errores** | Gemini (acepta capturas de pantalla) |
+| **Uso académico general** | Gemini o ChatGPT |
 
 ## Cómo Hacer Buenas Preguntas a la IA
 
@@ -235,7 +270,26 @@ La IA puede:
 - Busca en la documentación oficial
 - Pregunta a tu profesor si tienes dudas
 
-## Configuración de Claude Code en VS Code
+## Configuración y Primeros Pasos
+
+### Empezar con Gemini (RECOMENDADO para principiantes)
+
+1. **Abre tu navegador** y ve a [gemini.google.com](https://gemini.google.com)
+2. **Inicia sesión** con tu cuenta de Gmail
+3. **Prueba tu primera pregunta**:
+   ```
+   "Hola, estoy aprendiendo Python y Big Data.
+    ¿Puedes explicarme qué es un DataFrame?"
+   ```
+4. **¡Listo!** Ya puedes usar Gemini
+
+**Tips para Gemini**:
+- Puedes subir imágenes (capturas de pantalla de errores)
+- Mantiene el historial de conversaciones
+- Puedes compartir conversaciones con tu profesor
+- Funciona en español e inglés
+
+### Configuración de Claude Code en VS Code (Opcional)
 
 1. Abre VS Code
 2. Ve a Extensions (Ctrl+Shift+X)
@@ -247,7 +301,7 @@ La IA puede:
 - `Ctrl+Shift+P` → "Ask Claude": Pregunta directa
 - Selecciona código → Click derecho → "Explain with Claude"
 
-## Configuración de GitHub Copilot
+### Configuración de GitHub Copilot (Opcional)
 
 1. Aplica al [GitHub Student Pack](https://education.github.com/pack)
 2. Una vez aprobado (puede tardar unos días)
@@ -255,26 +309,41 @@ La IA puede:
 4. Inicia sesión con tu cuenta de GitHub
 5. Escribe comentarios y te autocompleta
 
-## Ejercicio Práctico: Usa la IA
+## Ejercicio Práctico: Tu Primera Conversación con IA
 
-Prueba estos prompts con tu IA favorita:
+**Abre Gemini ahora** ([gemini.google.com](https://gemini.google.com)) y prueba estos prompts:
 
-1. **Nivel Básico**:
-   ```
-   "Explica la diferencia entre una lista y un DataFrame en Python"
-   ```
+### 1. Nivel Básico - Conceptos
+```
+"Hola Gemini, estoy comenzando a aprender Python para Big Data.
+¿Puedes explicarme la diferencia entre una lista y un DataFrame en Python?
+Dame ejemplos prácticos."
+```
 
-2. **Nivel Intermedio**:
-   ```
-   "Tengo un DataFrame con columnas: fecha, ciudad, temperatura.
-    ¿Cómo calculo la temperatura promedio por ciudad?"
-   ```
+### 2. Nivel Intermedio - Código Específico
+```
+"Tengo un DataFrame de pandas con estas columnas: fecha, ciudad, temperatura.
+¿Puedes mostrarme el código para calcular la temperatura promedio por ciudad?
+Explica cada línea del código."
+```
 
-3. **Nivel Avanzado**:
-   ```
-   "Explica qué es lazy evaluation en Dask y por qué es importante
-    en Big Data. Usa un ejemplo con el dataset de taxis."
-   ```
+### 3. Nivel Avanzado - Conceptos Técnicos
+```
+"Estoy estudiando Dask para Big Data.
+¿Puedes explicar qué es 'lazy evaluation' y por qué es importante?
+Usa un ejemplo aplicado a un dataset de taxis de NYC."
+```
+
+### 4. Debugging - Tu Primer Error (Prueba esto cuando tengas un error real)
+```
+"Gemini, estoy ejecutando este código Python:
+[pega tu código aquí]
+
+Y me sale este error:
+[pega el error completo aquí]
+
+¿Qué significa este error y cómo lo soluciono?"
+```
 
 ## Checklist de Uso Responsable
 
@@ -294,10 +363,17 @@ Después de recibir la respuesta:
 
 ## Recursos Adicionales
 
-- [Documentación oficial de Claude](https://docs.anthropic.com/)
-- [Guía de GitHub Copilot](https://docs.github.com/en/copilot)
+### Herramientas de IA
+- [Google Gemini](https://gemini.google.com) - Empieza aquí (gratis)
+- [ChatGPT](https://chat.openai.com) - Alternativa popular (gratis)
+- [Claude AI](https://claude.ai) - Explicaciones detalladas (gratis)
+- [GitHub Copilot](https://github.com/features/copilot) - Autocompletado en VS Code
+
+### Tutoriales y Cursos
 - [Prompts efectivos para código](https://www.youtube.com/results?search_query=effective+prompts+for+coding+AI)
 - [Curso: IA para Desarrolladores](https://www.deeplearning.ai/short-courses/)
+- [Google AI Essentials](https://grow.google/ai-essentials/) - Curso gratuito de Google
+- [Guía de GitHub Copilot](https://docs.github.com/en/copilot)
 
 ## Reflexión Final
 
@@ -315,6 +391,18 @@ De la misma forma:
 
 ---
 
-**¿Listo para empezar?** Haz tu primera pregunta a una IA sobre los ejercicios y comprueba cómo te ayuda a aprender mejor.
+**¿Listo para empezar?** Abre [Gemini](https://gemini.google.com) ahora mismo y haz tu primera pregunta sobre Big Data y Python.
+
+---
+
+## Resumen: Tu Plan de Acción
+
+1. ✅ **Abre Gemini** → [gemini.google.com](https://gemini.google.com)
+2. ✅ **Inicia sesión** con tu Gmail
+3. ✅ **Haz tu primera pregunta** de prueba
+4. ✅ **Guarda el enlace** en tus marcadores
+5. ✅ **Úsalo durante los ejercicios** siguiendo el método de los 3 intentos
+
+**Recuerda**: La IA es tu asistente de aprendizaje, no tu reemplazo. Úsala para entender, no para copiar.
 
 > "La IA no reemplaza tu cerebro, lo potencia. Úsala sabiamente."

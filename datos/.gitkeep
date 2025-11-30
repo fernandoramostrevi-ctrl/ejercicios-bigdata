@@ -1,4 +1,0 @@
-# Este archivo mantiene la carpeta datos/ en el repositorio
-# Git no rastrea carpetas vacías, solo archivos.
-# Los archivos de datos (.db, .csv, .parquet) están en .gitignore
-# pero el script descargar_datos.py sí se sube al repo.

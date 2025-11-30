@@ -25,16 +25,29 @@ Un **fork** es tu copia personal de este proyecto donde trabajarás sin afectar 
 2. Selecciona tu cuenta personal
 3. ¡Listo! Ahora tienes tu propia copia
 
-### Paso 2: Lee las Guías
+### Paso 2: Configura tu Proyecto
 
-Este repositorio incluye guías paso a paso para ayudarte:
+**IMPORTANTE**: Sigue las instrucciones completas en:
+### 👉 **[INSTRUCCIONES_CONFIGURACION.md](./INSTRUCCIONES_CONFIGURACION.md)** 👈
 
-- **[GUIA_GIT_GITHUB.md](./GUIA_GIT_GITHUB.md)**: Todo sobre Git y GitHub (¡empieza aquí!)
-- **[GUIA_IA_ASISTENTE.md](./GUIA_IA_ASISTENTE.md)**: Cómo usar IA para aprender y programar
+Este archivo te guiará paso a paso para:
+- Clonar el repositorio
+- Crear las carpetas de trabajo
+- Copiar las plantillas de ejercicios
+- Instalar Python y dependencias
+- Descargar los datos
+
+### Paso 3: Lee las Guías
+
+Este repositorio incluye guías para ayudarte:
+
+- **[INSTRUCCIONES_CONFIGURACION.md](./INSTRUCCIONES_CONFIGURACION.md)**: Configuración inicial (¡empieza aquí!)
+- **[GUIA_GIT_GITHUB.md](./GUIA_GIT_GITHUB.md)**: Todo sobre Git y GitHub
+- **[GUIA_IA_ASISTENTE.md](./GUIA_IA_ASISTENTE.md)**: Cómo usar IA para aprender (Gemini, Claude, ChatGPT)
 - **[LEEME.md](./LEEME.md)**: Instrucciones técnicas de los ejercicios
 - **[ARQUITECTURA_Y_STACK.md](./ARQUITECTURA_Y_STACK.md)**: Conceptos avanzados (opcional)
 
-### Paso 3: Prepara tu Entorno
+### Paso 4: Prepara tu Entorno
 
 Necesitarás:
 - **Python 3.8+** instalado ([Descargar aquí](https://www.python.org/downloads/))
@@ -45,62 +58,44 @@ Necesitarás:
 
 ```
 ejercicios_bigdata/
-├── README.md                    # Este archivo
-├── GUIA_GIT_GITHUB.md           # Guía de Git para principiantes
-├── GUIA_IA_ASISTENTE.md         # Guía para usar IA
-├── LEEME.md                     # Instrucciones de ejercicios
-├── ARQUITECTURA_Y_STACK.md      # Conceptos técnicos
-├── requirements.txt             # Librerías Python necesarias
-├── PROGRESO.md                  # Tu checklist de avance
-├── datos/                       # Tus datos descargados (no se suben a GitHub)
-│   └── descargar_datos.py       # Script para descargar datos
-└── ejercicios/                  # Aquí trabajarás
-    ├── 01_cargar_sqlite.py      # Ejercicio 1: Bases de datos
-    ├── 02_limpieza_datos.py     # Ejercicio 2: Limpieza de datos
-    ├── 03_parquet_dask.py       # Ejercicio 3: Big Data con Dask
-    └── 04_pyspark_query.py      # Ejercicio 4: Apache Spark
+├── README.md                       # Este archivo
+├── INSTRUCCIONES_CONFIGURACION.md  # Configuración inicial (¡LEE ESTO PRIMERO!)
+├── GUIA_GIT_GITHUB.md              # Guía de Git para principiantes
+├── GUIA_IA_ASISTENTE.md            # Guía para usar IA (Gemini, Claude, ChatGPT)
+├── LEEME.md                        # Instrucciones técnicas de ejercicios
+├── ARQUITECTURA_Y_STACK.md         # Conceptos técnicos
+├── requirements.txt                # Librerías Python necesarias
+├── PROGRESO.md                     # Tu checklist de avance
+├── plantillas/                     # Plantillas originales (NO modificar)
+│   ├── datos/
+│   │   └── descargar_datos.py      # Plantilla del script de descarga
+│   └── ejercicios/
+│       ├── 01_cargar_sqlite.py     # Plantilla ejercicio 1
+│       ├── 02_limpieza_datos.py    # Plantilla ejercicio 2
+│       ├── 03_parquet_dask.py      # Plantilla ejercicio 3
+│       └── 04_pyspark_query.py     # Plantilla ejercicio 4
+├── datos/                          # TU carpeta (crearás después)
+│   └── descargar_datos.py          # Tu copia para trabajar
+└── ejercicios/                     # TU carpeta (crearás después)
+    ├── 01_cargar_sqlite.py         # Tu ejercicio 1
+    ├── 02_limpieza_datos.py        # Tu ejercicio 2
+    ├── 03_parquet_dask.py          # Tu ejercicio 3
+    └── 04_pyspark_query.py         # Tu ejercicio 4
 ```
+
+**Nota**: Las carpetas `datos/` y `ejercicios/` NO están en el repositorio inicial. Las crearás siguiendo **[INSTRUCCIONES_CONFIGURACION.md](./INSTRUCCIONES_CONFIGURACION.md)**.
 
 ## Cómo Trabajar en este Proyecto
 
-### 1. Clona TU fork a tu computadora
+### Sigue este Orden:
 
-```bash
-# Reemplaza "TU_USUARIO" con tu nombre de usuario de GitHub
-git clone https://github.com/TU_USUARIO/ejercicios_bigdata.git
-cd ejercicios_bigdata
-```
-
-### 2. Crea un entorno virtual de Python
-
-```bash
-# Crear el entorno
-python -m venv .venv
-
-# Activar el entorno
-# En Windows:
-.venv\Scripts\activate
-# En Mac/Linux:
-source .venv/bin/activate
-```
-
-### 3. Instala las dependencias
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Descarga los datos
-
-```bash
-python datos/descargar_datos.py
-```
-
-### 5. Comienza con el Ejercicio 1
-
-```bash
-python ejercicios/01_cargar_sqlite.py
-```
+1. **Lee** → [INSTRUCCIONES_CONFIGURACION.md](./INSTRUCCIONES_CONFIGURACION.md) (configuración completa)
+2. **Lee** → [GUIA_GIT_GITHUB.md](./GUIA_GIT_GITHUB.md) (si no conoces Git)
+3. **Lee** → [GUIA_IA_ASISTENTE.md](./GUIA_IA_ASISTENTE.md) (cómo usar Gemini y otras IAs)
+4. **Lee** → [LEEME.md](./LEEME.md) (instrucciones de ejercicios)
+5. **Comienza** → Ejercicio 01_cargar_sqlite.py
+6. **Actualiza** → PROGRESO.md después de cada ejercicio
+7. **Haz commit y push** → Sube tu progreso a GitHub regularmente
 
 ## Seguimiento de tu Progreso
 
