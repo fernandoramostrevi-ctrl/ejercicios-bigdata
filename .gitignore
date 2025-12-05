@@ -109,3 +109,12 @@ exports/
 *.backup
 evaluaciones/
 *.profesor.md
+
+# =============================================================================
+# RECORDATORIO IMPORTANTE
+# =============================================================================
+# Al hacer commits, usa mensajes CORTOS:
+# ✅ CORRECTO:   git commit -m "Actualizar ejercicios"
+# ❌ EVITAR:     Mensajes largos con múltiples líneas
+#
+# Razón: Mensajes cortos = tooltips pequeños en GitHub
