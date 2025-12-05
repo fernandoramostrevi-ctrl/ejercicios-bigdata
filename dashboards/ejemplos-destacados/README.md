@@ -1,6 +1,6 @@
 # 🌟 Trabajos Destacados de Alumnos
 
-Esta carpeta contiene los **mejores trabajos** de alumnos de cursos anteriores.
+Esta carpeta contiene los mejores trabajos de alumnos de cursos anteriores.
 
 ---
 
