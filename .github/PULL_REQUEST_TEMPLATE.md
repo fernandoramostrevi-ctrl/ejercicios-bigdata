@@ -1,5 +1,9 @@
 # Dashboard: [Nombre del Dashboard]
 
+> **Flujo correcto**: Fork del repo → Trabajar en tu fork → Abrir PR desde tu fork hacia el repo original
+
+---
+
 ## 👨‍🎓 Información del Alumno
 
 - **Nombre:** [Tu nombre completo]
@@ -82,7 +86,8 @@ Ejemplos:
 - [ ] El código está comentado
 - [ ] Las visualizaciones se muestran correctamente
 - [ ] Leí y seguí la guía [PARA_ALUMNOS.md](../PARA_ALUMNOS.md)
-- [ ] Este PR viene de una rama (no desde `main`)
+- [ ] Este PR viene desde MI fork (no desde el repositorio original)
+- [ ] La rama tiene formato: `alumno/mi-nombre-apellido`
 
 ---
 
