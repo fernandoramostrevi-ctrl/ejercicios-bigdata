@@ -119,3 +119,7 @@ exports/
 # Archivos de evaluación
 evaluaciones/
 rubrica_privada.md
+
+# Documentación interna de sesiones de trabajo
+RESUMEN_SESIONES.md
+EXPLICACION_COMANDOS_LIMPIEZA.md
