@@ -3,10 +3,15 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 # --- CONFIGURACIÓN DE RUTAS ---
-# Es importante ser ordenado con las rutas.
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-RUTA_CSV = os.path.join(BASE_DIR, "ejercicios_bigdata", "datos", "nyc_taxi.csv")
-RUTA_DB = os.path.join(BASE_DIR, "ejercicios_bigdata", "taxi.db")
+# Para evitar problemas, construimos las rutas de forma relativa al script.
+# Directorio del proyecto (la carpeta que contiene 'ejercicios/' y 'datos/')
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Directorio de datos
+DATA_DIR = os.path.join(PROJECT_DIR, "datos")
+
+# Rutas finales al archivo CSV y a la base de datos de destino
+RUTA_CSV = os.path.join(DATA_DIR, "nyc_taxi.csv")
+RUTA_DB = os.path.join(DATA_DIR, "taxi.db") # Guardaremos la BD en la misma carpeta de datos
 
 def cargar_csv_a_sqlite():
     """

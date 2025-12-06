@@ -6,6 +6,14 @@ Ejemplo de referencia para alumnos
 from flask import Flask, render_template, jsonify
 import pandas as pd
 import json
+"""
+Dashboard Flask - EDA NYC Taxi Dataset
+Ejemplo de referencia para alumnos
+"""
+
+from flask import Flask, render_template, jsonify
+import pandas as pd
+import json
 import os
 
 app = Flask(__name__)

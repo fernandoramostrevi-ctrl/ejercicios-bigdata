@@ -4,10 +4,16 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # --- CONFIGURACIÓN DE RUTAS ---
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-RUTA_CSV = os.path.join(BASE_DIR, "ejercicios_bigdata", "datos", "nyc_taxi.csv")
-RUTA_LIMPIO = os.path.join(BASE_DIR, "ejercicios_bigdata", "datos", "taxi_limpio.csv")
-RUTA_GRAFICO = os.path.join(BASE_DIR, "ejercicios_bigdata", "datos", "distribucion_distancia.png")
+# Para evitar problemas, construimos las rutas de forma relativa al script.
+# Directorio del proyecto (la carpeta que contiene 'ejercicios/' y 'datos/')
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Directorio de datos
+DATA_DIR = os.path.join(PROJECT_DIR, "datos")
+
+# Rutas a los archivos de entrada y salida
+RUTA_CSV = os.path.join(DATA_DIR, "nyc_taxi.csv")
+RUTA_LIMPIO = os.path.join(DATA_DIR, "taxi_limpio.csv")
+RUTA_GRAFICO = os.path.join(DATA_DIR, "distribucion_distancia.png")
 
 def limpiar_datos():
     """

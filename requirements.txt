@@ -8,3 +8,4 @@ seaborn
 requests
 flask
 plotly
+plotly>=5.0.0
