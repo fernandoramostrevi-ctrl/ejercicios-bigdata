@@ -267,7 +267,7 @@ Antes de hacer commit, prueba que todo funciona:
 cd dashboards/tu-nombre-dashboard/
 
 # Ejecuta el dashboard
-python app.py
+python app_V1.py
 ```
 
 Abre tu navegador en: http://localhost:5000

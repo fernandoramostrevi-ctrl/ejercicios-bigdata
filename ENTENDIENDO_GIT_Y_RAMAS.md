@@ -434,7 +434,7 @@ ls dashboards/juan-dashboard/
 
 ```bash
 # Ver diferencias entre dos dashboards mergeados
-git diff main:dashboards/juan-dashboard/app.py main:dashboards/maria-dashboard/app.py
+git diff main:dashboards/juan-dashboard/app_V1.py main:dashboards/maria-dashboard/app_V1.py
 
 # Ver historial de commits de un dashboard específico
 git log --oneline -- dashboards/juan-dashboard/

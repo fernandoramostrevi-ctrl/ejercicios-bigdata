@@ -1,0 +1,9 @@
+# Este proyecto fue desarrollado y probado con Python 3.13.
+# Es recomendable usar esta versión de Python para garantizar la compatibilidad.
+
+# Dependencias para el dashboard interactivo (app_dash.py)
+# Se especifican las versiones para garantizar la reproducibilidad del entorno.
+
+pandas==2.1.4
+plotly==5.17.0
+dash==2.14.0

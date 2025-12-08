@@ -353,7 +353,7 @@ pip install -r requirements.txt
 ## Uso
 ```bash
 cd dashboards/mi-dashboard
-python app.py
+python app_V1.py
 ```
 
 Luego abre: http://localhost:5000

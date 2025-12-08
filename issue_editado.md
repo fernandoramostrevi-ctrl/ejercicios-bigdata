@@ -154,13 +154,13 @@ Ejemplo: `git checkout -b juan-perez-dashboard-eda`
 ```bash
 mkdir dashboards/tu-nombre-dashboard
 cd dashboards/tu-nombre-dashboard
-# Crear app.py, templates/, README.md
+# Crear app_V1.py, templates/, README.md
 # Programar tu dashboard
 ```
 
 #### Paso 5: Probar que funciona
 ```bash
-python app.py
+python app_V1.py
 # Abrir http://localhost:5000
 # Verificar que todo funciona
 ```

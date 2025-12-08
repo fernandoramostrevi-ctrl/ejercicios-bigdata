@@ -35,7 +35,7 @@ cd dashboards/nyc_taxi_eda
 
 3. Ejecuta la aplicación:
 ```bash
-python app.py
+python app_V1.py
 ```
 
 4. Abre tu navegador en: http://localhost:5000
