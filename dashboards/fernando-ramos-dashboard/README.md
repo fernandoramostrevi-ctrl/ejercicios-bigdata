@@ -82,6 +82,7 @@ El análisis exploratorio a través del dashboard revela varias tendencias inter
 
 ## 🔮 Futuras Mejoras
 
+
 - **Filtros Avanzados:** Añadir más filtros, como por hora del día o `RatecodeID`.
 - **Análisis Geográfico:** Incorporar un mapa interactivo para visualizar las zonas de origen y destino (`PULocationID`, `DOLocationID`) más populares.
 - **Despliegue:** Empaquetar la aplicación en un contenedor Docker y desplegarla en un servicio en la nube (como Heroku o AWS).
