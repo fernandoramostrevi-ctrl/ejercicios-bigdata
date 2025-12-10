@@ -10,7 +10,12 @@
 
 ## 🚀 Inicio Rápido
 
-**👨‍🎓 ¿Eres alumno?** → Lee **[PARA_ALUMNOS.md](PARA_ALUMNOS.md)**
+**👨‍🎓 ¿Eres alumno y es tu primera vez?**
+- 📖 **[GUÍA COMPLETA PARA ALUMNOS](GUIA_PARA_ALUMNOS.md)** ← **¡EMPIEZA AQUÍ!**
+- Aprende cómo hacer fork, trabajar con Git, y entregar ejercicios correctamente
+- Evita errores comunes y aprende best practices
+
+**👨‍🎓 ¿Ya sabes trabajar con Git?** → Lee **[PARA_ALUMNOS.md](PARA_ALUMNOS.md)** para info del curso
 
 **👀 ¿Solo curioseas?** → Explora los **[ejemplos destacados](dashboards/ejemplos-destacados/)**
 
