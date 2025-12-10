@@ -42,26 +42,26 @@ Workflow:
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│                   ARQUITECTURA DEL SISTEMA                │
+│                   ARQUITECTURA DEL SISTEMA               │
 ├──────────────────────────────────────────────────────────┤
-│                                                           │
+│                                                          │
 │  GitHub PÚBLICO (origin/main)                            │
-│  ├─ Esqueleto limpio para alumnos                       │
-│  ├─ Solo ejercicios base (plantillas vacías)            │
-│  └─ Sin soluciones, sin archivos privados               │
-│                                                           │
+│  ├─ Esqueleto limpio para alumnos                        │
+│  ├─ Solo ejercicios base (plantillas vacías)             │
+│  └─ Sin soluciones, sin archivos privados                │
+│                                                          │
 │  GitHub PRIVADO (desarrollo/desarrollo)                  │
-│  ├─ Todo el contenido del público +                     │
-│  ├─ .profesor/ (carpeta completa privada)               │
-│  ├─ Ejercicios en desarrollo                            │
-│  ├─ Soluciones completas                                │
-│  └─ Materiales del profesor                             │
-│                                                           │
+│  ├─ Todo el contenido del público +                      │
+│  ├─ .profesor/ (carpeta completa privada)                │
+│  ├─ Ejercicios en desarrollo                             │
+│  ├─ Soluciones completas                                 │
+│  └─ Materiales del profesor                              │
+│                                                          │
 │  Repositorio LOCAL                                       │
-│  ├─ Branch 'main' → sincroniza con público              │
-│  ├─ Branch 'desarrollo' → sincroniza con privado        │
-│  └─ Siempre trabajar en 'desarrollo'                    │
-│                                                           │
+│  ├─ Branch 'main' → sincroniza con público               │
+│  ├─ Branch 'desarrollo' → sincroniza con privado         │
+│  └─ Siempre trabajar en 'desarrollo'                     │
+│                                                          │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -141,7 +141,7 @@ soluciones/
 # CHECKLIST DE INICIO - EJECUTAR SIEMPRE
 # ════════════════════════════════════════════════════════
 
-# 1. Ir al directorio del proyecto
+# 1. Ir al directorio del proyecto (la que pertenezca obvio)
 cd C:/Users/jmarc/PycharmProjects/ejercicios-bigdata
 
 # 2. Verificar en qué branch estás
@@ -887,7 +887,7 @@ Es un enfoque donde defines **especificaciones formales ANTES de implementar**.
 
 ```
 ┌──────────────────────────────────────────────────┐
-│         SPEC-DRIVEN DEVELOPMENT WORKFLOW          │
+│         SPEC-DRIVEN DEVELOPMENT WORKFLOW         │
 ├──────────────────────────────────────────────────┤
 │                                                   │
 │  1. ESPECIFICAR                                   │
