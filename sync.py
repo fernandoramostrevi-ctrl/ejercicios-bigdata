@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Script de Sincronización entre Ordenadores
 ===========================================
@@ -14,7 +15,13 @@ Uso:
 
 import subprocess
 import sys
+import os
 from pathlib import Path
+
+# Fix encoding for Windows
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
 
 
 def run_command(cmd, description=""):
