@@ -1,126 +1,88 @@
 # Dashboard de Análisis Exploratorio de Datos (EDA) - Taxis de NYC
 
-## 1. Resumen del Proyecto
+# Este proyecto presenta un dashboard web interactivo para el análisis exploratorio de un dataset de viajes de taxi 
+# en la ciudad de Nueva York. 
+# La aplicación permite a los usuarios visualizar y filtrar los datos para descubrir patrones y tendencias.
 
-Este proyecto presenta un dashboard web interactivo para el análisis exploratorio
-de un dataset de viajes de taxi en la ciudad de Nueva York.
+![Vista Previa del Dashboard](http://127.0.0.1:8050/)
 
-La aplicación, desarrollada con **Dash** y **Plotly**, permite a los usuarios
-visualizar patrones, identificar tendencias y extraer insights a través de una
-interfaz dinámica y responsiva.
 
-<!--
-**Importante:** Se recomienda tomar una captura de pantalla del dashboard
-funcionando y guardarla como `screenshot.png` en esta carpeta para que se
-visualice aquí.
--->
-<!-- ![Vista Previa del Dashboard](screenshot.png) -->
+## 🚀 Características Principales
 
-## 2. Stack Tecnológico
+- **Dashboard Interactivo:** Interfaz web creada con Dash y Plotly para una experiencia de usuario dinámica.
+- **Métricas Clave (KPIs):** Visualización en tiempo real del total de viajes, tarifa media y distancia media.
+- **Filtros Dinámicos:** Permite filtrar todos los gráficos por día de la semana para un análisis más profundo.
+- **Visualizaciones Múltiples:** Incluye histogramas, gráficos de barras, gráficos de pastel, diagramas de dispersión y 
+- **gráficos de cajas para un análisis completo.
 
-*   **Lenguaje:** Python 3.13
-*   **Análisis de Datos:** Pandas
-*   **Visualización y Dashboard:** Plotly & Dash
+## 🛠️ Stack Tecnológico
 
-## 3. 🚀 Guía de Inicio Rápido
+- **Lenguaje:** Python 3.13
+- **Análisis de Datos:** Pandas==2.1.4
+- **Visualización y Dashboard:** plotly==5.17.0 y dash==2.14.0
+
+## ⚙️ Instalación y Ejecución
 
 Sigue estos pasos para ejecutar el dashboard en tu entorno local.
 
-### Paso 1: Prerrequisitos
+### 1. Prerrequisitos
 
-*   Asegúrate de tener **Python 3.13** instalado en tu sistema.
-*   Confirma que el archivo `nyc_taxi.csv` se encuentra en la carpeta `datos/`
-    del proyecto principal.
+- Tener Python 3.13 instalado.
+- Disponer del archivo `nyc_taxi.csv` en la carpeta `datos/` del proyecto.
 
-### Paso 2: Configuración del Entorno Virtual
+### 2. Configuración del Entorno
 
-Desde la terminal, en la **raíz del proyecto** (`ejercicios-bigdata`), ejecuta
-los siguientes comandos para crear y configurar el entorno virtual:
+Desde la terminal, en la raíz del proyecto (ejercicios-bigdata), ejecuta los siguientes comandos para crear 
+y configurar el entorno virtual:
 
-```bash
-# 1. Crea un nuevo entorno virtual llamado .venv
-python -m venv .venv
+> # Crea un nuevo entorno virtual llamado .venv
+>    python -m venv .venv
+>
+> # Activa el entorno virtual
+>    .\.venv\Scripts\Activate.ps1
+>
+> # Instala las dependencias
+> pip install -r requirements_2.txt
+>
 
-# 2. Activa el entorno virtual
-# En Windows (PowerShell):
-.\.venv\Scripts\Activate.ps1
+### 3. Iniciar la Aplicación
 
-# En macOS/Linux:
-# source .venv/bin/activate
-```
+Una vez instalado el entorno, inicia el servidor de Dash con el siguiente comando:
 
-### Paso 3: Instalación de Dependencias
+> python dashboards/fernando-ramos-dashboard/app_dash.py
+> 
+### 4. Acceder al Dashboard
 
-Este dashboard tiene sus propias dependencias. Para no interferir con el archivo
-`requirements.txt` principal del repositorio, se ha creado un archivo
-específico llamado `requirements_2.txt`.
-
-Instala las dependencias usando este archivo:
-
-```bash
-# Instala las librerías exactas para este dashboard
-pip install -r requirements_2.txt
-```
-
-### Paso 4: Ejecutar la Aplicación
-
-Una vez configurado el entorno, inicia el servidor de Dash. Asegúrate de
-ejecutar el siguiente comando también desde la **raíz del proyecto**:
-
-```bash
-python dashboards/fernando-ramos-dashboard/app_dash.py
-```
-
-El proceso puede tardar unos segundos mientras se cargan y procesan los datos.
-
-### Paso 5: Acceder al Dashboard
-
-Cuando la terminal muestre un mensaje como `Dash is running on http://127.0.0.1:8050/`,
-abre tu navegador web y ve a esa dirección:
+Abre tu navegador web y ve a la siguiente dirección:
 
 **http://127.0.0.1:8050/**
 
 Para detener el servidor, vuelve a la terminal y presiona `Ctrl + C`.
 
-## 4. 📊 Hallazgos y Conclusiones del Análisis
+## 📊 Interpretación de los Datos y Hallazgos
 
-El análisis exploratorio a través del dashboard revela varias tendencias clave
-sobre la dinámica de los viajes de taxi en NYC:
+El análisis exploratorio a través del dashboard revela varias tendencias interesantes sobre los viajes de taxi en NYC:
 
-1.  **El Ritmo de la Ciudad: Patrones Semanales.**
-    Se observa un claro patrón en la actividad a lo largo de la semana. El número
-    de viajes aumenta progresivamente desde el lunes, alcanza su pico los **viernes**,
-    y desciende durante el fin de semana, siendo el domingo el día de menor actividad.
+1.  **Patrón Semanal de Viajes:** Se observa un claro patrón en la actividad a lo largo de la semana. 
+    **El número de viajes aumenta progresivamente desde el lunes, alcanza su pico los viernes, 
+    **y desciende durante el fin de semana.
 
-2.  **El Dominio del Plástico: Métodos de Pago.**
-    El pago con **tarjeta de crédito** es el método predominante, superando
-    ampliamente al pago en **efectivo**. Esto sugiere una alta bancarización de
-    los usuarios y una preferencia por la comodidad del pago digital.
+2.  **Distribución del Tipo de Pago:** El pago con **tarjeta de crédito** es el método predominante,
+    **seguido por el pago en **efectivo**. Los otros métodos de pago son minoritarios.
 
-3.  **La Generosidad Digital: Propinas y Tipo de Pago.**
-    El análisis de propinas es concluyente: se registran casi exclusivamente en
-    los pagos con **tarjeta**. Esto indica que las propinas en efectivo no se
-    digitalizan en el sistema o son menos comunes, y que la funcionalidad de
-    propina en los terminales de pago es un factor clave en los ingresos de los
-    conductores.
+3.  **Relación entre Propina y Tipo de Pago:** El análisis de propinas muestra que estas se registran casi exclusivamente 
+    **en los pagos con **tarjeta**.En los viajes pagados en efectivo rara vez registran una propina en el sistema, 
+    **lo que sugiere que, si se dan, no son digitalizadas.
 
-4.  **A Mayor Coste, Mayor Propina.**
-    Existe una clara correlación positiva entre el **importe total** del viaje y
-    la **propina**. A mayor coste del viaje, los pasajeros tienden a dejar una
-    propina proporcionalmente mayor, especialmente en los pagos con tarjeta.
+4.  **Correlación entre Importe y Propina:** Existe una clara correlación positiva entre el importe total del viaje 
+    **y la propina. A mayor coste del viaje, mayor tiende a ser la propina, especialmente en los pagos con tarjeta.
 
-5.  **La Lógica del Taxímetro: Distancia vs. Tarifa.**
-    Como es de esperar, hay una fuerte correlación positiva entre la **distancia**
-    del viaje y la **tarifa total**. El modelo de precios es consistente y se
-    basa fundamentalmente en la distancia recorrida.
+5.  **Correlación entre Distancia y Tarifa:** Como es de esperar, hay una fuerte correlación positiva entre la distancia
+    **del viaje y la tarifa total. Viajes más largos implican costes más altos.
 
-## 5. 🔮 Futuras Mejoras
+## 🔮 Futuras Mejoras
 
-*   **Filtros Avanzados:** Añadir más filtros, como por hora del día o
-    `RatecodeID`, para un análisis más granular.
-*   **Análisis Geográfico:** Incorporar un mapa interactivo (Choropleth) para
-    visualizar las zonas de origen (`PULocationID`) y destino (`DOLocationID`)
-    más populares, utilizando un archivo GeoJSON.
-*   **Despliegue:** Empaquetar la aplicación en un contenedor Docker y desplegarla
-    en un servicio en la nube (como Heroku, Render o AWS) para hacerla
-    accesible públicamente.
+
+- **Filtros Avanzados:** Añadir más filtros, como por hora del día o `RatecodeID`.
+- **Análisis Geográfico:** Incorporar un mapa interactivo para visualizar las zonas de origen y destino (`PULocationID`, `DOLocationID`) más populares.
+- **Despliegue:** Empaquetar la aplicación en un contenedor Docker y desplegarla en un servicio en la nube (como Heroku o AWS).

@@ -9,7 +9,7 @@ from dash.dependencies import Input, Output
 
 def cargar_y_preparar_datos():
     """
-    Carga, prepara y devuelve el dataset de taxis de NYC junto con un resumen de la limpieza.
+    Carga y prepara el dataset de taxis de NYC.
     """
     print("🔄 Cargando y preparando datos...")
     try:
@@ -20,42 +20,23 @@ def cargar_y_preparar_datos():
 
         if not os.path.exists(csv_path):
             print(f"❌ Error: No se encontró el archivo en: {csv_path}")
-            return None, None
+            return None
 
-        df_raw = pd.read_csv(csv_path, low_memory=False)
+        df = pd.read_csv(csv_path, low_memory=False, parse_dates=['tpep_pickup_datetime'])
         
-        initial_rows = len(df_raw)
-        initial_nulls = df_raw.isnull().sum()
-        initial_dtypes = df_raw.dtypes
-        
-        df = df_raw.copy()
-        df['tpep_pickup_datetime'] = pd.to_datetime(df['tpep_pickup_datetime'], errors='coerce')
-        df['tpep_dropoff_datetime'] = pd.to_datetime(df['tpep_dropoff_datetime'], errors='coerce')
-
-        df.dropna(subset=['total_amount', 'trip_distance', 'passenger_count', 'payment_type', 'tip_amount', 'tpep_pickup_datetime', 'tpep_dropoff_datetime'], inplace=True)
+        # Limpieza y Feature Engineering
+        df.dropna(subset=['total_amount', 'trip_distance', 'passenger_count', 'payment_type', 'tip_amount'], inplace=True)
         df = df[(df['trip_distance'] > 0) & (df['trip_distance'] < 50) & (df['total_amount'] > 0) & (df['total_amount'] < 500)].copy()
-        
-        final_rows = len(df)
-        
         df['hora_pickup'] = df['tpep_pickup_datetime'].dt.hour
         df['dia_semana'] = df['tpep_pickup_datetime'].dt.day_name()
         
-        resumen_calidad = {
-            "filas_iniciales": initial_rows,
-            "filas_eliminadas": initial_rows - final_rows,
-            "filas_finales": final_rows,
-            "nulos_iniciales": initial_nulls[initial_nulls > 0].to_dict(),
-            "tipos_datos_iniciales": initial_dtypes.astype(str).to_dict()
-        }
-        
         print("✅ Datos cargados y preparados.")
-        return df, resumen_calidad
-
+        return df
     except Exception as e:
         print(f"❌ Error inesperado: {e}")
-        return None, None
+        return None
 
-df, resumen_calidad_global = cargar_y_preparar_datos()
+df = cargar_y_preparar_datos()
 
 # --- 2. Inicialización de la App Dash ---
 
@@ -74,13 +55,8 @@ if df is not None:
             html.Div([
                 html.Label("Selecciona un día de la semana:", style={'fontWeight': 'bold'}),
                 dcc.Dropdown(id='dropdown-dia-semana', options=dias_semana_options, value='All'),
-            ], style={'width': '30%', 'display': 'inline-block', 'verticalAlign': 'top', 'paddingRight': '20px'}),
+            ], style={'width': '30%', 'display': 'inline-block', 'verticalAlign': 'top'}),
             html.Div(id='kpi-container', style={'width': '68%', 'display': 'inline-block', 'textAlign': 'center', 'verticalAlign': 'top'}),
-        ], style={'marginBottom': '20px'}),
-
-        html.Div([
-            html.Div(id='calidad-datos-output', style={'width': '49%', 'display': 'inline-block', 'verticalAlign': 'top', 'paddingRight': '1%'}),
-            html.Div(id='estadisticas-output', style={'width': '49%', 'display': 'inline-block', 'verticalAlign': 'top', 'paddingLeft': '1%'})
         ], style={'marginBottom': '20px'}),
 
         html.Div([
@@ -91,7 +67,7 @@ if df is not None:
             dcc.Graph(id='grafico-tarifa-hist'),
             dcc.Graph(id='grafico-distancia-vs-tarifa'),
             dcc.Graph(id='grafico-propina-vs-importe'),
-            dcc.Graph(id='grafico-propina-por-pago'),
+            dcc.Graph(id='grafico-propina-por-pago'), # Nuevo gráfico de cajas
         ])
     ])
 else:
@@ -101,8 +77,6 @@ else:
 
 @app.callback(
     [Output('kpi-container', 'children'),
-     Output('calidad-datos-output', 'children'),
-     Output('estadisticas-output', 'children'),
      Output('grafico-viajes-por-dia', 'figure'),
      Output('grafico-tipo-pago', 'figure'),
      Output('grafico-pasajeros-hora', 'figure'),
@@ -110,12 +84,12 @@ else:
      Output('grafico-tarifa-hist', 'figure'),
      Output('grafico-distancia-vs-tarifa', 'figure'),
      Output('grafico-propina-vs-importe', 'figure'),
-     Output('grafico-propina-por-pago', 'figure')],
+     Output('grafico-propina-por-pago', 'figure')], # Output para el nuevo gráfico
     [Input('dropdown-dia-semana', 'value')]
 )
 def actualizar_dashboard(dia_seleccionado):
     if df is None:
-        return [html.Div()] * 11
+        return [html.Div()] + [{}] * 8 # Actualizado a 8 gráficos
 
     print(f"🔄 Actualizando dashboard para: {dia_seleccionado}")
     
@@ -126,46 +100,17 @@ def actualizar_dashboard(dia_seleccionado):
         df_filtrado = df[df['dia_semana'] == dia_seleccionado]
         titulo_sufijo = f" ({dia_seleccionado})"
 
-    # --- 1. KPIs ---
+    # --- KPIs ---
     kpis = html.Div([
         html.Div(f"Total Viajes: {len(df_filtrado):,.0f}", style={'display': 'inline-block', 'fontSize': 20, 'margin': '0 20px'}),
         html.Div(f"Tarifa Media: ${df_filtrado['total_amount'].mean():,.2f}", style={'display': 'inline-block', 'fontSize': 20, 'margin': '0 20px'}),
         html.Div(f"Distancia Media: {df_filtrado['trip_distance'].mean():,.2f} mi", style={'display': 'inline-block', 'fontSize': 20, 'margin': '0 20px'}),
     ])
 
-    # --- 2. Análisis de Calidad de Datos (con estilo mejorado) ---
-    calidad_div = html.Div([
-        html.H3("Análisis de Calidad de Datos", style={'textAlign': 'center', 'color': '#333'}),
-        html.P(f"Filas iniciales: {resumen_calidad_global['filas_iniciales']:,}"),
-        html.P(f"Filas eliminadas (nulos/outliers): {resumen_calidad_global['filas_eliminadas']:,}", style={'color': '#dc3545'}),
-        html.P(f"Filas finales para análisis: {resumen_calidad_global['filas_finales']:,}", style={'fontWeight': 'bold', 'color': '#28a745'}),
-        html.H4("Valores Nulos Iniciales (Top 5)", style={'marginTop': '15px'}),
-        html.Table([
-            html.Thead(html.Tr([html.Th("Columna"), html.Th("Nulos")])),
-            html.Tbody([
-                html.Tr([html.Td(col), html.Td(f"{count:,}")])
-                for col, count in list(resumen_calidad_global['nulos_iniciales'].items())[:5]
-            ])
-        ])
-    ], style={'border': '1px solid #e9ecef', 'padding': '20px', 'borderRadius': '8px', 'backgroundColor': '#ffffff', 'boxShadow': '0 4px 6px rgba(0, 0, 0, 0.05)'})
-
-    # --- 3. Estadísticas Descriptivas (con estilo mejorado) ---
-    stats_df = df_filtrado[['trip_distance', 'total_amount', 'tip_amount']].describe().round(2)
-    estadisticas_div = html.Div([
-        html.H3("Estadísticas Descriptivas" + titulo_sufijo, style={'textAlign': 'center', 'color': '#333'}),
-        html.Table([
-            html.Thead(html.Tr([html.Th('Métrica', style={'textAlign': 'left'})] + [html.Th(col) for col in stats_df.columns])),
-            html.Tbody([
-                html.Tr([html.Td(index, style={'fontWeight': 'bold'})] + [html.Td(stats_df.loc[index, col]) for col in stats_df.columns])
-                for index in stats_df.index
-            ])
-        ])
-    ], style={'border': '1px solid #e9ecef', 'padding': '20px', 'borderRadius': '8px', 'backgroundColor': '#ffffff', 'boxShadow': '0 4px 6px rgba(0, 0, 0, 0.05)'})
-
-    # --- 4. Gráficos ---
+    # --- Gráficos ---
     payment_map = {1: 'Tarjeta', 2: 'Efectivo', 3: 'Sin Cargo', 4: 'Disputa', 5: 'Desconocido', 6: 'Viaje Anulado'}
     df_filtrado['payment_type_desc'] = df_filtrado['payment_type'].map(payment_map).fillna('Otro')
-    
+
     viajes_por_dia = df.groupby('dia_semana').size().reindex(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']).reset_index(name='count')
     fig_viajes_dia = px.bar(viajes_por_dia, x='dia_semana', y='count', title='Total de Viajes por Día de la Semana')
 
@@ -183,12 +128,21 @@ def actualizar_dashboard(dia_seleccionado):
 
     fig_propina_vs_importe = px.scatter(df_sample, x='total_amount', y='tip_amount', title='Relación entre Importe Total y Propina' + titulo_sufijo, labels={'total_amount': 'Importe Total ($)', 'tip_amount': 'Propina ($)'}, opacity=0.5)
 
+    # Nuevo Gráfico: Distribución de propinas por tipo de pago
     df_con_propina = df_filtrado[df_filtrado['tip_amount'] > 0]
-    fig_propina_por_pago = px.box(df_con_propina, x='payment_type_desc', y='tip_amount', title='Distribución de Propinas por Tipo de Pago' + titulo_sufijo, labels={'payment_type_desc': 'Tipo de Pago', 'tip_amount': 'Propina ($)'}, color='payment_type_desc')
+    fig_propina_por_pago = px.box(
+        df_con_propina,
+        x='payment_type_desc',
+        y='tip_amount',
+        title='Distribución de Propinas por Tipo de Pago (Propinas > 0)' + titulo_sufijo,
+        labels={'payment_type_desc': 'Tipo de Pago', 'tip_amount': 'Propina ($)'},
+        color='payment_type_desc'
+    )
 
-    return kpis, calidad_div, estadisticas_div, fig_viajes_dia, fig_tipo_pago, fig_pasajeros_hora, fig_dist_hist, fig_tarifa_hist, fig_dist_vs_tarifa, fig_propina_vs_importe, fig_propina_por_pago
+    return kpis, fig_viajes_dia, fig_tipo_pago, fig_pasajeros_hora, fig_dist_hist, fig_tarifa_hist, fig_dist_vs_tarifa, fig_propina_vs_importe, fig_propina_por_pago
 
 # --- 5. Ejecución de la Aplicación ---
+
 if __name__ == '__main__':
     if df is not None:
         app.run(debug=True)
