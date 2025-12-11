@@ -1764,7 +1764,7 @@ Entreno equipos en:
 - **Personalizado:** Adaptado a tu industria y tecnologías
 
 **Modalidades:**
-- Presencial (Madrid - Otros EU, USA, LATAM, a solicituud)
+- Presencial (Madrid - Otros EU, USA, LATAM, a solicitud)
 - Online (Zoom/Teams)
 - Híbrido
 
