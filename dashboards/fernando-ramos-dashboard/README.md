@@ -9,6 +9,13 @@ La aplicación, desarrollada con **Dash** y **Plotly**, permite a los usuarios
 visualizar patrones, identificar tendencias y extraer insights a través de una
 interfaz dinámica y responsiva.
 
+<!--
+**Importante:** Se recomienda tomar una captura de pantalla del dashboard
+funcionando y guardarla como `screenshot.png` en esta carpeta para que se
+visualice aquí.
+-->
+<!-- ![Vista Previa del Dashboard](screenshot.png) -->
+
 ## 2. Stack Tecnológico
 
 *   **Lenguaje:** Python 3.13
