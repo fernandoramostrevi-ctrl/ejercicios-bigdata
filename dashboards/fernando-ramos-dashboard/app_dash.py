@@ -148,3 +148,4 @@ if __name__ == '__main__':
         app.run(debug=True)
     else:
         print("\n🚫 La aplicación no puede iniciar porque los datos no se cargaron.")
+
