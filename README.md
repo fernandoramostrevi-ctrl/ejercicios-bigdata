@@ -1503,7 +1503,6 @@ git push origin tu-rama-ejercicio
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Versión interactiva (se verá bonita en GitHub):**
 
 ```mermaid
 graph TD
