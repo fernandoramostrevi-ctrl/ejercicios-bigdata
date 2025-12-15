@@ -166,9 +166,9 @@ def sync_push():
 
 
 def sync_publicar():
-    """Publica cambios de rama desarrollo a main público."""
+    """Publica cambios de rama desarrollo a main público vía Pull Request."""
     print("=" * 60)
-    print("[PUBLICAR] DESARROLLO -> MAIN PUBLICO")
+    print("[PUBLICAR] DESARROLLO -> MAIN PUBLICO (VIA PR)")
     print("=" * 60)
 
     current_branch = get_current_branch()
@@ -187,28 +187,98 @@ def sync_publicar():
         run_command("git status", "")
         return False
 
-    # Cambiar a main
-    if not run_command("git checkout main", "Cambiando a rama main"):
+    # Asegurarse de estar en desarrollo
+    if current_branch != "desarrollo":
+        if not run_command("git checkout desarrollo", "Cambiando a rama desarrollo"):
+            return False
+
+    # Verificar que desarrollo está pusheado al remoto
+    print("\n[INFO] La rama main está PROTEGIDA. Se creará un Pull Request.")
+    print("[INFO] Asegurando que desarrollo esté actualizado en el remoto privado...")
+
+    if not run_command("git push desarrollo desarrollo", "Subiendo desarrollo al repo privado"):
         return False
 
-    # Merge desarrollo en main (fast-forward)
-    if not run_command("git merge desarrollo --no-edit", "Mergeando desarrollo en main"):
-        print("\n[WARN] Si hay conflictos, resuélvelos y luego:")
-        print("    git add .")
-        print("    git commit")
-        print("    git push origin main")
-        print("    git checkout desarrollo")
+    # Verificar si gh está instalado
+    result = subprocess.run(
+        "gh --version",
+        shell=True,
+        capture_output=True,
+        text=True
+    )
+
+    if result.returncode != 0:
+        print("\n[ERROR] GitHub CLI (gh) no está instalado.")
+        print("[INFO] Instálalo desde: https://cli.github.com/")
+        print("[INFO] O crea el PR manualmente desde GitHub Web:")
+        print("       https://github.com/TodoEconometria/ejercicios-bigdata-profesor")
         return False
 
-    # Push a origin/main (público)
-    if not run_command("git push origin main", "Publicando en origin/main (público)"):
-        return False
+    # Crear Pull Request
+    print("\n[>] Creando Pull Request...")
+    result = subprocess.run(
+        'gh pr create --repo TodoEconometria/ejercicios-bigdata '
+        '--base main --head TodoEconometria:desarrollo '
+        '--title "SYNC: Publicar cambios de desarrollo a main" '
+        '--body "Sincronización automática desde sync.py"',
+        shell=True,
+        capture_output=True,
+        text=True
+    )
 
-    # Volver a desarrollo
-    if not run_command("git checkout desarrollo", "Volviendo a rama desarrollo"):
-        return False
+    if result.returncode != 0:
+        # Verificar si ya existe un PR
+        if "already exists" in result.stderr:
+            print("[WARN] Ya existe un PR abierto. Buscando...")
+            # Obtener el número del PR existente
+            list_result = subprocess.run(
+                'gh pr list --repo TodoEconometria/ejercicios-bigdata '
+                '--base main --head TodoEconometria:desarrollo --json number --jq ".[0].number"',
+                shell=True,
+                capture_output=True,
+                text=True
+            )
+            if list_result.stdout.strip():
+                pr_number = list_result.stdout.strip()
+                print(f"[INFO] PR existente encontrado: #{pr_number}")
+            else:
+                print("[ERROR] No se pudo crear ni encontrar el PR")
+                print(result.stderr)
+                return False
+        else:
+            print("[ERROR] Error al crear PR:")
+            print(result.stderr)
+            return False
+    else:
+        print(result.stdout)
+        # Extraer número de PR del output
+        import re
+        match = re.search(r'#(\d+)', result.stdout)
+        if match:
+            pr_number = match.group(1)
+        else:
+            print("[WARN] PR creado pero no se pudo obtener el número")
+            pr_number = None
 
-    print("\n[OK] Cambios publicados exitosamente en repo público")
+    # Mergear automáticamente el PR
+    if pr_number:
+        print(f"\n[>] Mergeando Pull Request #{pr_number}...")
+        merge_result = subprocess.run(
+            f'gh pr merge {pr_number} --repo TodoEconometria/ejercicios-bigdata --merge',
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+
+        if merge_result.returncode != 0:
+            print("[ERROR] Error al mergear PR:")
+            print(merge_result.stderr)
+            print(f"\n[INFO] Mergea manualmente desde: https://github.com/TodoEconometria/ejercicios-bigdata/pull/{pr_number}")
+            return False
+
+        print(merge_result.stdout)
+
+    print("\n[OK] Cambios publicados exitosamente en repo público vía PR")
     return True
 
 
