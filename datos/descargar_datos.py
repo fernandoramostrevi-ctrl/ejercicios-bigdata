@@ -15,8 +15,8 @@ def asegurar_directorio(ruta):
 
 def descargar():
     asegurar_directorio(DATA_DIR)
-    ruta_csv_final = os.path.join(DATA_DIR, "nyc_taxi.csv")
-    ruta_gz = os.path.join(DATA_DIR, "nyc_taxi.csv.gz")
+    ruta_csv_final = os.path.join(DATA_DIR, "ejercicios-bigdata" , "nyc_taxi.csv")
+    ruta_gz = os.path.join(DATA_DIR, "ejercicios-bigdata" , "nyc_taxi.csv.gz")
     
     if os.path.exists(ruta_csv_final):
         print(f"✅ El archivo ya existe en: {ruta_csv_final}")

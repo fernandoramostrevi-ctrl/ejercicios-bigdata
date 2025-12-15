@@ -10,8 +10,8 @@ PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA_DIR = os.path.join(PROJECT_DIR, "datos")
 
 # Rutas finales al archivo CSV y a la base de datos de destino
-RUTA_CSV = os.path.join(DATA_DIR, "nyc_taxi.csv")
-RUTA_DB = os.path.join(DATA_DIR, "taxi.db") # Guardaremos la BD en la misma carpeta de datos
+RUTA_CSV = os.path.join(DATA_DIR, "ejercicios-bigdata", "nyc_taxi.csv")
+RUTA_DB = os.path.join(DATA_DIR, "ejercicios-bigdata", "taxi.db") # Guardaremos la BD en la misma carpeta de datos
 
 def cargar_csv_a_sqlite():
     """
