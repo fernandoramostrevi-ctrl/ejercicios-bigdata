@@ -29,6 +29,24 @@ Toda la documentación, guías, ejercicios y tutoriales están en:
 
 ---
 
+## ⚠️ IMPORTANTE: Mantén tu Fork Actualizado
+
+> **Si ya hiciste fork del repositorio, lee esto:**
+>
+> Durante el curso agregaré **nuevos ejercicios constantemente**. Tu fork NO se actualiza automáticamente.
+>
+> **👉 [Guía completa de sincronización →](https://todoeconometria.github.io/ejercicios-bigdata/git-github/sincronizar-fork/#el-problema)**
+>
+> **Resumen rápido:**
+> ```bash
+> git fetch upstream
+> git merge upstream/main
+> ```
+>
+> **¿No funciona?** Lee la guía completa arriba - tiene diagramas paso a paso.
+
+---
+
 ## 🎯 ¿Qué Aprenderás?
 
 ### El Problema Común
