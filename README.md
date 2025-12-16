@@ -1,4 +1,4 @@
-# 🚀 Big Data con Python - De Cero a Producción
+# 🚀 Big Data con Python - De Cero a Producción   "Hola"
 
 > **Aprende a procesar millones de registros sin que tu computadora explote**
 > Repositorio educativo completo para dominar Big Data con Python, desde conceptos básicos hasta producción.
