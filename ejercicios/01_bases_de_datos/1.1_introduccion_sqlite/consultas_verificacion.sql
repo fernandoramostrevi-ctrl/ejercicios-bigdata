@@ -318,6 +318,13 @@ WHERE estado != 'cancelado'
 GROUP BY mes
 ORDER BY mes DESC;
 
+SELECT COUNT(*) FROM customer;
+SELECT COUNT(*) FROM "order";
+SELECT COUNT(*) FROM order_item;
+SELECT COUNT(*) FROM inventory;
+SELECT MIN(stock), MAX(stock) FROM inventory;
+
+
 
 -- ═══════════════════════════════════════════════════════════════════
 -- CONSULTAS COMPARATIVAS (Ejecutar en cada modelo)
