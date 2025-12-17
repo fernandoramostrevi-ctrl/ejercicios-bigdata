@@ -6,10 +6,24 @@ Lista completa de todos los ejercicios disponibles en el curso.
 
 ## Roadmap de Ejercicios
 
-| # | Ejercicio | Tecnologia | Nivel | Tiempo | Estado |
+### Módulo 1: Bases de Datos
+
+| # | Ejercicio | Tecnología | Nivel | Tiempo | Estado |
 |---|-----------|------------|-------|--------|--------|
-| 01 | Introduccion SQLite | SQLite + Pandas | 🟢 Basico | 2-3h | ✅ Disponible |
-| 02 | Limpieza de Datos | Pandas | 🟢 Basico | 3-4h | 🚧 Proximo |
+| 1.1 | Introducción SQLite | SQLite + Pandas | 🟢 Básico | 8-10h | ✅ Disponible |
+| 2.1 | PostgreSQL HR | PostgreSQL | 🟡 Intermedio | 4-6h | 🚧 Próximo |
+| 2.2 | PostgreSQL Jardinería | PostgreSQL | 🟡 Intermedio | 4-6h | 🚧 Próximo |
+| 2.3 | Migración SQLite → PostgreSQL | PostgreSQL + Python | 🟡 Intermedio | 3-4h | 🚧 Próximo |
+| 3.1 | Oracle HR | Oracle Database | 🔴 Avanzado | 5-7h | 🚧 Próximo |
+| 3.2 | Oracle Jardinería | Oracle Database | 🔴 Avanzado | 4-5h | 🚧 Próximo |
+| 4.1 | SQL Server Tienda | SQL Server | 🔴 Avanzado | 4-5h | 🚧 Próximo |
+| 5.1 | Análisis Excel/Python | Pandas + Excel | 🟢 Básico | 3-4h | 🚧 Próximo |
+
+### Módulo 2: Big Data (Próximamente)
+
+| # | Ejercicio | Tecnología | Nivel | Tiempo | Estado |
+|---|-----------|------------|-------|--------|--------|
+| 02 | Limpieza de Datos | Pandas | 🟢 Básico | 3-4h | 📅 Planificado |
 | 03 | Parquet y Dask | Dask + Parquet | 🟡 Intermedio | 4-5h | 📅 Planificado |
 | 04 | PySpark Queries | PySpark | 🔴 Avanzado | 5-6h | 📅 Planificado |
 | 05 | Dashboard Interactivo | Flask + Chart.js | 🔴 Avanzado | 8-10h | 📅 Planificado |
@@ -17,9 +31,9 @@ Lista completa de todos los ejercicios disponibles en el curso.
 
 ---
 
-## NIVEL 1: Fundamentos
+## MÓDULO 1: Bases de Datos
 
-### [Ejercicio 01: Introduccion a SQLite](01-introduccion-sqlite.md)
+### [Ejercicio 1.1: Introducción a SQLite](01-introduccion-sqlite.md)
 
 !!! info "Detalles"
     - **Nivel:** 🟢 Basico
@@ -46,6 +60,106 @@ Lista completa de todos los ejercicios disponibles en el curso.
 
 ---
 
+### [Ejercicio 2.1: PostgreSQL con BD HR](02-postgresql-hr.md)
+
+!!! info "Detalles"
+    - **Nivel:** 🟡 Intermedio
+    - **Tiempo:** 4-6 horas
+    - **Base de Datos:** HR (Human Resources) de Oracle
+    - **Tecnologías:** PostgreSQL, SQL
+
+**Qué aprenderás:**
+
+- Instalar y configurar PostgreSQL
+- Cargar bases de datos desde scripts SQL
+- Consultas complejas con múltiples JOINs
+- Funciones específicas de PostgreSQL
+- Comparar Oracle vs PostgreSQL
+
+[Ver Ejercicio Completo →](02-postgresql-hr.md){ .md-button }
+
+---
+
+### [Ejercicio 2.2: PostgreSQL Jardinería](03-postgresql-jardineria.md)
+
+!!! info "Detalles"
+    - **Nivel:** 🟡 Intermedio
+    - **Tiempo:** 4-6 horas
+    - **Base de Datos:** Sistema de ventas de jardinería
+    - **Tecnologías:** PostgreSQL, Window Functions
+
+**Qué aprenderás:**
+
+- Análisis de ventas con SQL
+- Agregaciones complejas (GROUP BY, HAVING)
+- Window Functions para rankings
+- Optimización con índices
+- Vistas materializadas
+
+[Ver Ejercicio Completo →](03-postgresql-jardineria.md){ .md-button }
+
+---
+
+### [Ejercicio 2.3: Migración SQLite → PostgreSQL](04-migracion-sqlite-postgresql.md)
+
+!!! info "Detalles"
+    - **Nivel:** 🟡 Intermedio
+    - **Tiempo:** 3-4 horas
+    - **Tecnologías:** SQLite, PostgreSQL, Python
+
+**Qué aprenderás:**
+
+- Diferencias entre motores de BD
+- Migrar esquemas y datos
+- Adaptar tipos de datos
+- Validar integridad
+- Comparar rendimiento
+
+[Ver Ejercicio Completo →](04-migracion-sqlite-postgresql.md){ .md-button }
+
+---
+
+### [Ejercicio 3.1: Oracle con BD HR](05-oracle-hr.md)
+
+!!! warning "Avanzado"
+    - **Nivel:** 🔴 Avanzado
+    - **Tiempo:** 5-7 horas
+    - **Base de Datos:** HR en Oracle nativo
+    - **Tecnologías:** Oracle Database, PL/SQL
+
+**Qué aprenderás:**
+
+- Instalar Oracle Database XE
+- Sintaxis específica de Oracle
+- PL/SQL (procedimientos, funciones)
+- Secuencias y triggers
+- Comparar con PostgreSQL
+
+[Ver Ejercicio Completo →](05-oracle-hr.md){ .md-button }
+
+---
+
+### [Ejercicio 5.1: Análisis Excel/Python](06-analisis-excel-python.md)
+
+!!! info "Detalles"
+    - **Nivel:** 🟢 Básico-Intermedio
+    - **Tiempo:** 3-4 horas
+    - **Tecnologías:** Python, Pandas, Excel
+
+**Qué aprenderás:**
+
+- Leer archivos Excel con Python
+- Análisis exploratorio de datos (EDA)
+- Visualizaciones con matplotlib/seaborn
+- Automatizar análisis
+- Comparar manual vs programático
+
+[Ver Ejercicio Completo →](06-analisis-excel-python.md){ .md-button }
+
+---
+
+## MÓDULO 2: Big Data
+
 ### Ejercicio 02: Limpieza y Transformacion
 
 !!! warning "Proximamente"
@@ -60,8 +174,6 @@ Lista completa de todos los ejercicios disponibles en el curso.
 - Normalizacion y estandarizacion
 
 ---
-
-## NIVEL 2: Escalando
 
 ### Ejercicio 03: Procesamiento con Parquet y Dask
 
@@ -92,8 +204,6 @@ Lista completa de todos los ejercicios disponibles en el curso.
 - Particionamiento de datos
 
 ---
-
-## NIVEL 3: Visualizacion y Deploy
 
 ### Ejercicio 05: Dashboard Interactivo
 
