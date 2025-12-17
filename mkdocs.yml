@@ -194,6 +194,9 @@ nav:
   - Dashboards:
     - dashboards/index.md
 
+  - Entregas:
+    - Guia General de Entregas: entregas/guia-entregas.md
+
   - FAQ: faq.md
 
 copyright: >
