@@ -1,12 +1,5 @@
 # 📝 Ejercicio 1.1: Introducción a SQLite - Cargar Datos desde CSV
 
-<<<<<<< HEAD
-=======
-> **📤 ¿Cómo entregar este ejercicio?** Lee las instrucciones completas aquí: [INSTRUCCIONES_ENTREGA.md](./INSTRUCCIONES_ENTREGA.md)
-
----
-
->>>>>>> upstream/main
 ## 🎯 Objetivos de Aprendizaje
 
 Al completar este ejercicio serás capaz de:
@@ -88,8 +81,6 @@ Todo lo del Modelo B, más:
 
 ## 🔧 Tareas a Realizar
 
-<<<<<<< HEAD
-=======
 ### **Fase 0: Análisis Exploratorio de Datos (EDA)** 🔍
 
 **⚠️ IMPORTANTE:** Antes de implementar cualquier modelo, debes **explorar y entender los datos**. No puedes diseñar una base de datos sin saber qué contiene.
@@ -388,7 +379,6 @@ Antes de continuar con los modelos A, B y C, debes tener:
 
 ---
 
->>>>>>> upstream/main
 ### Parte 1: Modelo A - Catálogo Simple
 
 1. **Crear script Python:** `solucion_modelo_a.py`
@@ -481,16 +471,6 @@ Tu carpeta `1.1_introduccion_sqlite/` debe contener:
 
 ```
 1.1_introduccion_sqlite/
-<<<<<<< HEAD
-├── solucion_modelo_a.py         # Script Modelo A
-├── solucion_modelo_b.py         # Script Modelo B
-├── solucion_modelo_c.py         # Script Modelo C
-├── consultas_verificacion.sql   # Queries de prueba
-├── REFLEXION.md                 # Respuestas a preguntas
-├── tienda_modelo_a.db          # BD generada (gitignore)
-├── tienda_modelo_b.db          # BD generada (gitignore)
-└── tienda_modelo_c.db          # BD generada (gitignore)
-=======
 ├── eda_exploratorio.py          # [FASE 0] Script de análisis exploratorio
 ├── resumen_eda.md               # [FASE 0] Salida del script EDA (Markdown)
 ├── ANALISIS_DATOS.md            # [FASE 0] Documento con hallazgos y diagramas ER
@@ -502,7 +482,6 @@ Tu carpeta `1.1_introduccion_sqlite/` debe contener:
 ├── tienda_modelo_a.db           # BD generada (gitignore)
 ├── tienda_modelo_b.db           # BD generada (gitignore)
 └── tienda_modelo_c.db           # BD generada (gitignore)
->>>>>>> upstream/main
 ```
 
 **Nota:** Los archivos `.db` NO se suben a GitHub (están en `.gitignore`)
@@ -513,16 +492,10 @@ Tu carpeta `1.1_introduccion_sqlite/` debe contener:
 
 | Criterio | Peso | Qué se evalúa |
 |----------|------|---------------|
-<<<<<<< HEAD
-| **Funcionalidad** | 40% | Los 3 scripts generan las BDs correctamente, datos se cargan sin errores |
-| **Diseño del Esquema** | 30% | Modelo B y C tienen estructura correcta, FKs bien definidas, normalización adecuada |
-| **Código** | 20% | Limpio, comentado, buenas prácticas, manejo de errores |
-=======
 | **Fase 0: EDA** | 15% | Script EDA ejecuta correctamente, `ANALISIS_DATOS.md` completo con diagramas ER, análisis de calidad de datos |
 | **Funcionalidad** | 35% | Los 3 scripts generan las BDs correctamente, datos se cargan sin errores |
 | **Diseño del Esquema** | 25% | Modelo B y C tienen estructura correcta, FKs bien definidas, normalización adecuada |
 | **Código** | 15% | Limpio, comentado, buenas prácticas, manejo de errores |
->>>>>>> upstream/main
 | **Reflexión** | 10% | Respuestas demuestran comprensión de trade-offs entre modelos |
 
 ---
@@ -635,8 +608,6 @@ Si terminas antes y quieres más práctica:
 
 Antes de dar por terminado el ejercicio, verifica:
 
-<<<<<<< HEAD
-=======
 ### Fase 0: Análisis Exploratorio
 - [ ] `eda_exploratorio.py` ejecuta sin errores
 - [ ] `resumen_eda.md` se genera correctamente con estadísticas en formato Markdown
@@ -649,18 +620,10 @@ Antes de dar por terminado el ejercicio, verifica:
   - [ ] Conclusiones para el Diseño
 
 ### Partes 1-3: Implementación de Modelos
->>>>>>> upstream/main
 - [ ] `solucion_modelo_a.py` funciona y genera `tienda_modelo_a.db`
 - [ ] `solucion_modelo_b.py` funciona y genera `tienda_modelo_b.db`
 - [ ] `solucion_modelo_c.py` funciona y genera `tienda_modelo_c.db`
 - [ ] Las 3 bases de datos se pueden abrir con DB Browser for SQLite
-<<<<<<< HEAD
-- [ ] `consultas_verificacion.sql` tiene al menos 3 queries por modelo
-- [ ] Todas las queries ejecutan sin errores
-- [ ] `REFLEXION.md` tiene respuestas completas a las 6 preguntas
-- [ ] El código está comentado y es legible
-- [ ] No hay archivos `.db` en el repositorio Git
-=======
 
 ### Parte 4: Consultas de Verificación
 - [ ] `consultas_verificacion.sql` tiene al menos 3 queries por modelo
@@ -673,7 +636,6 @@ Antes de dar por terminado el ejercicio, verifica:
 - [ ] El código está comentado y es legible
 - [ ] No hay archivos `.db` en el repositorio Git
 - [ ] Los diagramas ER se visualizan correctamente en GitHub
->>>>>>> upstream/main
 
 ---
 
@@ -684,10 +646,6 @@ Recuerda: El objetivo no es solo que funcione, sino que **entiendas** las difere
 ---
 
 **Creado:** 2025-12-11
-<<<<<<< HEAD
-**Duración estimada:** 5.5-7 horas
-=======
 **Última actualización:** 2025-12-15 (Agregada Fase 0: EDA)
 **Duración estimada:** 8-10 horas (2-3h Fase 0 + 6-7h Implementación)
->>>>>>> upstream/main
 **Nivel:** Básico-Intermedio
