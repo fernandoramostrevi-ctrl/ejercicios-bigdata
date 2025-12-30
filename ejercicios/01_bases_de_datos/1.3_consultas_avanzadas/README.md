@@ -148,7 +148,7 @@ Trabajarás con `tienda_modelo_c.db`
 
 ## 📦 Entrega
 
-Archivo `consultas_avanzadas.sql` con todas las consultas documentadas.
+Archivo `1.0_consultas_avanzadas.sql` con todas las consultas documentadas.
 
 ---
 

@@ -16,58 +16,95 @@ RUTA_DB_C = r"C:\Users\Tucanae Ramos\PycharmProjects\ejercicios-bigdata\ejercici
 
 def crear_tablas_extra(conn: sqlite3.Connection):
     cur = conn.cursor()
-    cur.executescript("""
+    cur.executescript(
+        """
+    -- Borrado previo para regenerar limpio
+    DROP TABLE IF EXISTS cart_item;
+    DROP TABLE IF EXISTS cart;
     DROP TABLE IF EXISTS inventory;
     DROP TABLE IF EXISTS order_item;
     DROP TABLE IF EXISTS "order";
     DROP TABLE IF EXISTS customer;
 
+    -- Clientes
     CREATE TABLE customer (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        email TEXT NOT NULL UNIQUE,
-        address TEXT
+        first_name    TEXT NOT NULL,
+        last_name     TEXT,
+        email         TEXT NOT NULL UNIQUE,
+        address       TEXT,
+        registered_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
+    -- Pedidos
     CREATE TABLE "order" (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
         customer_id INTEGER NOT NULL,
-        order_date TEXT NOT NULL,
-        status TEXT,
+        order_date  DATETIME NOT NULL,
+        status      TEXT CHECK(status IN ('pending','processing','paid','shipped','cancelled')),
+        total       REAL,
         FOREIGN KEY (customer_id) REFERENCES customer(id)
     );
 
+    -- Líneas de pedido
     CREATE TABLE order_item (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        order_id INTEGER NOT NULL,
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        order_id   INTEGER NOT NULL,
         product_id INTEGER NOT NULL,
-        quantity INTEGER NOT NULL,
+        quantity   INTEGER NOT NULL,
         unit_price REAL NOT NULL,
         FOREIGN KEY (order_id) REFERENCES "order"(id),
         FOREIGN KEY (product_id) REFERENCES product(id)
     );
 
+    -- Inventario
     CREATE TABLE inventory (
-        product_id INTEGER PRIMARY KEY,
-        stock INTEGER NOT NULL,
+        product_id  INTEGER PRIMARY KEY,
+        stock       INTEGER NOT NULL,
+        min_stock   INTEGER DEFAULT 10,
+        location    TEXT,
+        last_update DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (product_id) REFERENCES product(id)
     );
-    """)
+
+    -- Carritos
+    CREATE TABLE cart (
+        id               INTEGER PRIMARY KEY AUTOINCREMENT,
+        customer_id      INTEGER NOT NULL,
+        created_at       DATETIME DEFAULT CURRENT_TIMESTAMP,
+        last_modified_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        active           INTEGER DEFAULT 1,
+        FOREIGN KEY (customer_id) REFERENCES customer(id),
+        UNIQUE(customer_id)
+    );
+
+    -- Items de carrito
+    CREATE TABLE cart_item (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        cart_id    INTEGER NOT NULL,
+        product_id INTEGER NOT NULL,
+        quantity   INTEGER NOT NULL,
+        FOREIGN KEY (cart_id) REFERENCES cart(id),
+        FOREIGN KEY (product_id) REFERENCES product(id),
+        UNIQUE(cart_id, product_id)
+    );
+    """
+    )
     conn.commit()
 
 
 def generar_clientes(conn: sqlite3.Connection):
     clientes = [
-        ("Ana García", "ana@example.com", "Calle A 123, Madrid"),
-        ("Luis Pérez", "luis@example.com", "Avenida B 45, Barcelona"),
-        ("Marta López", "marta@example.com", "Calle C 7, Valencia"),
-        ("Juan Torres", "juan@example.com", "Calle D 9, Sevilla"),
-        ("Sara Ruiz", "sara@example.com", "Plaza E 3, Bilbao"),
+        ("Ana", "García", "ana@example.com", "Calle A 123, Madrid"),
+        ("Luis", "Pérez", "luis@example.com", "Avenida B 45, Barcelona"),
+        ("Marta", "López", "marta@example.com", "Calle C 7, Valencia"),
+        ("Juan", "Torres", "juan@example.com", "Calle D 9, Sevilla"),
+        ("Sara", "Ruiz", "sara@example.com", "Plaza E 3, Bilbao"),
     ]
     cur = conn.cursor()
     cur.executemany(
-        "INSERT INTO customer(name, email, address) VALUES (?, ?, ?)",
-        clientes
+        "INSERT INTO customer(first_name, last_name, email, address) VALUES (?, ?, ?, ?)",
+        clientes,
     )
     conn.commit()
 
@@ -78,13 +115,17 @@ def inicializar_inventario(conn: sqlite3.Connection):
     product_ids = [row[0] for row in cur.fetchall()]
 
     registros = []
+    ubicaciones = ["WH-A", "WH-B", "STORE-1", "STORE-2"]
     for pid in product_ids:
-        stock = random.randint(50, 200)
-        registros.append((pid, stock))
+        stock = random.randint(5, 200)
+        min_stock = random.randint(5, 30)
+        location = random.choice(ubicaciones)
+        registros.append((pid, stock, min_stock, location))
 
     cur.executemany(
-        "INSERT INTO inventory(product_id, stock) VALUES (?, ?)",
-        registros
+        "INSERT INTO inventory(product_id, stock, min_stock, location) "
+        "VALUES (?, ?, ?, ?)",
+        registros,
     )
     conn.commit()
 
@@ -99,31 +140,66 @@ def generar_pedidos_ejemplo(conn: sqlite3.Connection, num_pedidos: int = 3):
     cur.execute("SELECT id, price FROM product WHERE price IS NOT NULL")
     productos = cur.fetchall()  # lista de (product_id, price)
 
-    pedidos_ids = []
-
     # crear pedidos
     for _ in range(num_pedidos):
         customer_id = random.choice(clientes)
         fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        status = random.choice(["pending", "paid", "shipped"])
+        status = random.choice(["pending", "processing", "paid", "shipped"])
 
         cur.execute(
-            'INSERT INTO "order"(customer_id, order_date, status) VALUES (?, ?, ?)',
-            (customer_id, fecha, status)
+            'INSERT INTO "order"(customer_id, order_date, status, total) '
+            "VALUES (?, ?, ?, ?)",
+            (customer_id, fecha, status, 0.0),
         )
-        pedidos_ids.append(cur.lastrowid)
+        order_id = cur.lastrowid
 
-    # crear items de pedido (2-4 productos por pedido)
-    for order_id in pedidos_ids:
+        # crear items de pedido (2-4 productos por pedido)
+        total_pedido = 0.0
         num_items = random.randint(2, 4)
         for _ in range(num_items):
             product_id, price = random.choice(productos)
             quantity = random.randint(1, 3)
             unit_price = float(price)
+            subtotal = unit_price * quantity
+            total_pedido += subtotal
+
             cur.execute(
                 "INSERT INTO order_item(order_id, product_id, quantity, unit_price) "
                 "VALUES (?, ?, ?, ?)",
-                (order_id, product_id, quantity, unit_price)
+                (order_id, product_id, quantity, unit_price),
+            )
+
+        # actualizar total del pedido
+        cur.execute('UPDATE "order" SET total = ? WHERE id = ?', (total_pedido, order_id))
+
+    conn.commit()
+
+
+def generar_carritos(conn: sqlite3.Connection):
+    """Genera carritos activos para algunos clientes."""
+    cur = conn.cursor()
+
+    cur.execute("SELECT id FROM customer")
+    customers = [row[0] for row in cur.fetchall()]
+
+    cur.execute("SELECT id FROM product WHERE price IS NOT NULL LIMIT 50")
+    products = [row[0] for row in cur.fetchall()]
+
+    # seleccionamos hasta 3 clientes al azar para tener carrito
+    for customer_id in random.sample(customers, min(3, len(customers))):
+        cur.execute(
+            "INSERT INTO cart(customer_id, active) VALUES (?, 1)",
+            (customer_id,),
+        )
+        cart_id = cur.lastrowid
+
+        num_items = random.randint(1, 3)
+        for product_id in random.sample(products, num_items):
+            quantity = random.randint(1, 2)
+            cur.execute(
+                "INSERT INTO cart_item(cart_id, product_id, quantity) "
+                "VALUES (?, ?, ?)",
+                (cart_id, product_id, quantity),
             )
 
     conn.commit()
@@ -136,18 +212,19 @@ def main():
     # 1) Crear y poblar el Modelo B dentro de tienda_modelo_c.db
     crear_tablas_b(conn)
     fabricantes, colores, categorias, df_productos = construir_dimensiones_y_productos()
-    map_manufacturer, map_color, map_category = poblar_dimensiones(conn, fabricantes, colores, categorias)
+    map_manufacturer, map_color, map_category = poblar_dimensiones(
+        conn, fabricantes, colores, categorias
+    )
     poblar_productos(conn, df_productos, map_manufacturer, map_color, map_category)
 
-    # (Si en tu Modelo B también poblas cpu/motherboard/memory/storage, puedes reutilizar aquí esa lógica.)
-
-    # 2) Crear tablas extra de e-commerce
+    # 2) Crear tablas extra de e-commerce (tu Modelo C extendido)
     crear_tablas_extra(conn)
 
     # 3) Generar datos de ejemplo
-    generar_clientes(conn)              # 3–5 clientes ficticios
-    inicializar_inventario(conn)        # stock aleatorio 50–200 por producto
-    generar_pedidos_ejemplo(conn, 3)    # 2–3 pedidos de ejemplo
+    generar_clientes(conn)
+    inicializar_inventario(conn)
+    generar_pedidos_ejemplo(conn, 3)
+    generar_carritos(conn)
 
     conn.close()
     print("Modelo C creado en tienda_modelo_c.db")
