@@ -111,7 +111,7 @@ fue el mas importante para ti en este bloque]
 
 **Herramienta:** [ChatGPT / Claude / Copilot / otra]
 
-**El prompt que mas te ayudo en este bloque:**
+**El prompt que mas te ayudo en este bloque:** *** IMPORTANTE LEER BIEN TODO ANTES DE EJECUTAR NINGUN PASO ***
 ```
 [PEGA AQUI el texto EXACTO]
 ```

@@ -100,7 +100,7 @@ entregas/**/.env
 CLAUDE.md
 
 # 2. Scripts de administración del profesor (NO publicar)
-scripts/
+/scripts/
 
 # 3. Modulo 07 oculto temporalmente (no publicar hasta fecha indicada)
 ejercicios/07_infraestructura_bigdata/

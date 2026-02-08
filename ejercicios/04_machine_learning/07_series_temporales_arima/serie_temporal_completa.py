@@ -1,6 +1,6 @@
 """
 -------------------------
-Autor original/Referencia: @TodoEconometria
+Autor original/Rplugeferencia: @TodoEconometria
 Profesor: Juan Marcelo Gutierrez Miranda
 Metodologia: Cursos Avanzados de Big Data, Ciencia de Datos,
              Desarrollo de aplicaciones con IA & Econometria Aplicada.

@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # PostgreSQL - Base de datos para almacenar resultados procesados
+  postgres:
+    image: postgres:15-alpine
+    container_name: bigdata_postgres
+    environment:
+      POSTGRES_DB: bigdata
+      POSTGRES_USER: spark_user
+      POSTGRES_PASSWORD: spark_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - F:/LABSTORAGE/postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U spark_user -d bigdata"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - spark-network
+    restart: unless-stopped
+
+  # Spark Master - Coordinador del cluster
+  spark-master:
+    image: apache/spark:3.5.4-python3
+    container_name: spark_master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_WEBUI_PORT=8080
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    volumes:
+      - F:/LABSTORAGE/data:/opt/spark/work-dir/data
+      - F:/LABSTORAGE/spark_output:/opt/spark/work-dir/output
+      - F:/LABSTORAGE/spark_logs:/opt/spark/work-dir/logs
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+    networks:
+      - spark-network
+    restart: unless-stopped
+
+  # Spark Worker - Nodo de procesamiento
+  spark-worker:
+    image: apache/spark:3.5.4-python3
+    container_name: spark_worker_1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=6g
+    depends_on:
+      - spark-master
+    volumes:
+      - F:/LABSTORAGE/data:/opt/spark/work-dir/data
+      - F:/LABSTORAGE/spark_output:/opt/spark/work-dir/output
+      - F:/LABSTORAGE/spark_logs:/opt/spark/work-dir/logs
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077 --cores 2 --memory 6g
+    networks:
+      - spark-network
+    restart: unless-stopped
+
+networks:
+  spark-network:
+    driver: bridge

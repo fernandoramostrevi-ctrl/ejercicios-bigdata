@@ -1,0 +1,90 @@
+# docker-compose.yml - Cluster Spark + PostgreSQL
+version: '3.8'
+
+services:
+  # ============================
+  # SPARK MASTER
+  # ============================
+  spark-master:
+    image: bitnami/spark:3.5
+    container_name: spark-master
+    hostname: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_WEBUI_PORT=8080
+    ports:
+      - "7077:7077"    # Comunicacion del cluster
+      - "8080:8080"    # Web UI del Master
+    volumes:
+      - ./datos:/datos           # Datos compartidos
+      - ./scripts:/scripts       # Scripts Python
+      - ./jars:/opt/spark-jars   # JARs adicionales (JDBC, etc.)
+    networks:
+      - spark-network
+
+  # ============================
+  # SPARK WORKER 1
+  # ============================
+  spark-worker-1:
+    image: bitnami/spark:3.5
+    container_name: spark-worker-1
+    hostname: spark-worker-1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=4g
+    volumes:
+      - ./datos:/datos           # Mismos datos que el master
+      - ./scripts:/scripts       # Mismos scripts
+    depends_on:
+      - spark-master
+    networks:
+      - spark-network
+
+  # ============================
+  # SPARK WORKER 2
+  # ============================
+  spark-worker-2:
+    image: bitnami/spark:3.5
+    container_name: spark-worker-2
+    hostname: spark-worker-2
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=4g
+    volumes:
+      - ./datos:/datos
+      - ./scripts:/scripts
+    depends_on:
+      - spark-master
+    networks:
+      - spark-network
+
+  # ============================
+  # POSTGRESQL (para guardar resultados)
+  # ============================
+  postgres:
+    image: postgres:16
+    container_name: spark-postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: spark_user
+      POSTGRES_PASSWORD: spark_pass
+      POSTGRES_DB: resultados_spark
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - spark-network
+
+volumes:
+  postgres_data:
+
+networks:
+  spark-network:
+    driver: bridge
