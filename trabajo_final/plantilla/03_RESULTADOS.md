@@ -1,21 +1,18 @@
 # Paso 4: Resultados y Analisis
 
-**Alumno:** [Nombre Apellido]
-**Pregunta de investigacion:** [Tu pregunta]
+**Alumno:** Fernando Ramos
+
+¿La dependencia de recursos petrolíferos está asociada con mayores niveles de corrupción y menor desarrollo humano en Asia Central? Análisis comparativo 2002-2021.
 
 ---
 
-## 3.1 Grafico 1: [Titulo descriptivo]
+## 3.1 Grafico 1: Recursos Naturales VS Control de Corrupción
 
-![Grafico 1](capturas/grafico1.png)
+![01_recursos_corrupcion.png](../output/01_recursos_corrupcion.png)![Grafico 1](capturas/grafico1.png)
 
 ### Interpretacion
 
-[Escribe un parrafo respondiendo estas preguntas:
-- Que patron o tendencia se observa en el grafico?
-- Hay diferencias entre los paises? Cuales?
-- Hay algun punto de inflexion o cambio notable? En que anio?
-- Como se relaciona esto con tu pregunta de investigacion?]
+En el gráfico se observa una tendencia ligeramente positiva, es decir, a medida que aumenta el porcentaje de recursos naturales sobre el PIB, el índice de control de corrupción tiende a mejorar levemente, aunque la relación es débil (r=0.208) y existe mucha dispersión. Sí se aprecian diferencias claras entre países: Kazakhstan concentra los valores más altos de recursos naturales (puntos más a la derecha), mientras que Kyrgyzstan, Tajikistan y Uzbekistan se agrupan mayoritariamente en niveles bajos de recursos (cerca de 0–5%), y Turkmenistan presenta algunos valores relativamente elevados junto con mayor variabilidad. No se identifica un punto de inflexión temporal ni un cambio notable en un año concreto, ya que el gráfico no está organizado como serie temporal y los años se superponen sin orden visual, por lo que no permite detectar rupturas por fecha con claridad. En relación con la pregunta de investigación, los resultados no apoyan claramente la hipótesis de la “maldición de los recursos” en Asia Central para 2000–2021, ya que no se observa una relación negativa marcada entre recursos naturales y corrupción, sino una asociación débilmente positiva que podría estar influida por diferencias estructurales entre países.
 
 ### Prompt que usaste para generar este grafico
 

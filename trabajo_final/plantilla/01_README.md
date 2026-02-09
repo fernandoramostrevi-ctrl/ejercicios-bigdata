@@ -1,4 +1,4 @@
-# Trabajo Final: ¿La exportación de recursos naturales hacia Rusia, China y Europa determina el crecimiento económico y los niveles de corrupción en Asia Central? Análisis longitudinal (2000-2023)
+# Trabajo Final: "¿La dependencia de recursos petrolíferos está asociada con mayores niveles de corrupción y menor desarrollo humano en Asia Central? Análisis comparativo 2002-2021"
 
 **Alumno:** Fernando Ramos
 **Fecha:** [DD/MM/AAAA]
@@ -25,7 +25,7 @@ completas conforme avanzas.
 
 ## Pregunta de investigacion
 
-¿La exportación de recursos naturales hacia Rusia, China y Europa determina el crecimiento económico y los niveles de corrupción en Asia Central? Análisis longitudinal (2000-2023)
+¿La dependencia de recursos petrolíferos está asociada con mayores niveles de corrupción y menor desarrollo humano en Asia Central? Análisis comparativo 2002-2021.
 
 ---
 

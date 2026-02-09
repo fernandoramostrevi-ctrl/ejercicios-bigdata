@@ -7,6 +7,7 @@ Fecha: 06/02/2026
 
 import os
 import sys
+import shutil
 
 # ============================================================================
 # CONFIGURACIÓN DE HADOOP EN WINDOWS (SOLUCIÓN A HADOOP_HOME)
@@ -206,7 +207,22 @@ print("\n" + "="*70)
 print("PASO 7: GUARDADO DE RESULTADOS")
 print("="*70)
 
+# Definir función de log (si no existe)
+def log_step(step, msg):
+    print(f"\n[PASO {step}] {msg}")
+
+log_step(7, "Guardar datos limpios en Parquet")
+
+# FORZAR LIMPIEZA ANTES DE ESCRIBIR
 output_file = os.path.join(OUTPUT_PATH, "asia_central_processed")
+
+if os.path.exists(output_file):
+    try:
+        shutil.rmtree(output_file)
+        print(f"✓ Carpeta anterior eliminada: {output_file}")
+    except Exception as e:
+        print(f"⚠️ No se pudo eliminar la carpeta anterior: {e}")
+
 print(f"Guardando en: {output_file}")
 
 df_final.write.mode("overwrite").parquet(output_file)
