@@ -1,5 +1,19 @@
 # Big Data con Python - De Cero a Producción
 
+---
+
+## 🚀 PROYECTO FINAL DESTACADO (CAPSTONE PROJECT)
+**Alumno:** Fernando Ramos Treviño
+**Proyecto:** "¿La dependencia de recursos petrolíferos está asociada con mayores niveles de corrupción y menor desarrollo humano en Asia Central? Análisis comparativo 2002-2021"
+
+| Entregable | Enlace | Descripción |
+|------------|--------|-------------|
+| **📈 Dashboard Interactivo** | [**Ver Dashboard en Vivo**](https://fernandoramostrevi-ctrl.github.io/ejercicios-bigdata/dashboard_asia_central.html) | Aplicación interactiva (Dash/Plotly) con los resultados del análisis. |
+| **📄 Informe Ejecutivo** | [**Descargar PDF**](trabajo_final/plantilla/informes/Dashboard_Analisis_AsiaCentral_Profesional.pdf) | Memoria técnica con conclusiones, metodología y visualizaciones. |
+| **📊 Análisis Detallado** | [**Leer en GitHub**](trabajo_final/plantilla/03_RESULTADOS.md) | Documentación técnica del proceso de análisis y hallazgos. |
+
+---
+
 <div align="center">
 
 <img src="docs/assets/todoeconometria_logo.png" alt="TodoEconometria" width="350">
