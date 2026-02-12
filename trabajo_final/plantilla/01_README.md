@@ -1,6 +1,6 @@
-# Trabajo Final: [Tu Pregunta de Investigacion]
+# Trabajo Final: "¿La dependencia de recursos petrolíferos está asociada con mayores niveles de corrupción y menor desarrollo humano en Asia Central? Análisis comparativo 2002-2021"
 
-**Alumno:** [Nombre Apellido]
+**Alumno:** Fernando Ramos
 **Fecha:** [DD/MM/AAAA]
 
 ---
@@ -25,56 +25,56 @@ completas conforme avanzas.
 
 ## Pregunta de investigacion
 
-[Escribe aqui tu pregunta. Ejemplo: "Como ha evolucionado la calidad institucional
-en los paises del Cono Sur comparado con el Sudeste Asiatico entre 2000-2023?"]
+¿La dependencia de recursos petrolíferos está asociada con mayores niveles de corrupción y menor desarrollo humano en Asia Central? Análisis comparativo 2002-2021.
 
 ---
 
 ## Paises seleccionados (5)
+| # | País         | Código ISO | Por qué lo elegiste                                                                                                                                                                                                                                                                                                                                                             |
+| - | ------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 | Kazajistán   | KAZ        | País más rico de Asia Central por recursos naturales (petróleo, gas, uranio). Alto PIB per cápita (~$12,500) pero alta corrupción. Ejemplo paradigmático de "maldición de recursos": crecimiento económico sin mejora institucional. Exportador clave hacia Rusia, China y Europa. Estrategia multivectorial más desarrollada.                                                  |
+| 2 | Uzbekistán   | UZB        | Segundo país más poblado de la región. Economía basada en gas natural, algodón y oro. PIB medio (~$3,200). Transición política reciente (post-Karimov 2016) con reformas económicas parciales pero instituciones débiles. Pivote geográfico (fronterizo con todos los países centroasiáticos). Dependencia moderada de recursos permite comparación con extremos.               |
+| 3 | Kirguistán   | KGZ        | País con menor dependencia de recursos naturales (principalmente oro e hidroeléctrica). PIB bajo (~$2,100) pero relativamente más democrático que vecinos. Permite contrastar hipótesis: ¿menos recursos = menos corrupción? Alta dependencia de remesas desde Rusia. Vulnerabilidad institucional a pesar de baja renta extractiva. Caso control para "maldición de recursos". |
+| 4 | Tayikistán   | TJK        | País más pobre de Asia Central (PIB ~$1,800). Recursos limitados (aluminio, algodón, hidroeléctrica potencial). Altamente dependiente de remesas laborales. Permite analizar si pobreza extrema + pocos recursos = instituciones débiles por otros factores (guerra civil 1992-1997, geografía montañosa, aislamiento). Contraste con Kazajistán.                               |
+| 5 | Turkmenistán | TKM        | Dependencia extrema de gas natural (~35-40% PIB de renta de recursos). Régimen autocrático hermético. Datos frecuentemente incompletos pero crítico para análisis de casos extremos. Si la maldición de recursos es real, Turkmenistán debe mostrar PIB moderado-alto con corrupción extrema. Representa el límite superior de "Estado rentista".                               |
 
-| # | Pais | Codigo ISO | Por que lo elegiste |
-|---|------|------------|---------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-
-**IMPORTANTE:** No puedes usar los paises del ejemplo del profesor (KAZ, UZB, TKM, KGZ, TJK).
 
 ---
 
 ## Variables seleccionadas (5 numericas)
 
-| # | Variable QoG | Que mide | Por que la elegiste |
-|---|-------------|----------|---------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-
-**Tip:** Consulta el codebook de QoG para entender que mide cada variable:
+| # | Variable              | Nombre en QoG     | Tipo       | Rol en el análisis                                          |
+| - | --------------------- | ----------------- | ---------- | ----------------------------------------------------------- |
+| 1 | País                  | cname             | Categórica | Identificador de cada país (5 valores)                      |
+| 2 | Año                   | year              | Temporal   | Eje temporal del análisis (2000-2023)                       |
+| 3 | Recursos Naturales    | wdi_totalresrent  | Numérica   | Variable independiente: Renta de recursos (% PIB)           |
+| 4 | PIB per cápita        | wdi_gdpcapcon2017 | Numérica   | Variable dependiente 1: Desarrollo económico                |
+| 5 | Control de Corrupción | wbgi_cce          | Numérica   | Variable dependiente 2: Calidad institucional               |
+| 6 | Desarrollo Humano     | undp_hdi          | Numérica   | Variable dependiente 3: Bienestar ciudadano integral        |
+| 7 | Esperanza de Vida     | wdi_lifexp        | Numérica   | Variable dependiente 4: Salud pública y condiciones de vida |
 https://www.gu.se/en/quality-government/qog-data
 
 ---
 
 ## Variable derivada
 
-[Describe la variable que creaste a partir de las originales.
-Ejemplo: "Cree un indice de gobernanza = (control_corrupcion + estado_derecho) / 2"]
+| # | Variable Derivada                  | Fórmula                          | Motivo de Creación                                                                                                                                    |
+| - | ---------------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 | Brecha Corrupción-Riqueza          | PIB / (Corrupción + 3)           | Medir si la riqueza económica se traduce en buena gobernanza. Valores altos = país rico pero corrupto (riqueza no redistribuida institucionalmente).  |
+| 2 | Eficiencia de Recursos             | PIB / Recursos Naturales         | Evaluar cuánto PIB genera cada país por unidad de recursos extractivos. Baja eficiencia = economía no diversificada y vulnerable a shocks de precios. |
+| 3 | Índice de Bienestar Redistributivo | (PIB_norm + Corrupción_norm) / 2 | Crear métrica compuesta que combine desarrollo económico y calidad institucional. Captura si el crecimiento se traduce en bienestar ciudadano real.   |
 
 ---
 
 ## Tipo de analisis elegido
 
 - [ ] Clustering (K-Means)
-- [ ] Serie temporal (evolucion por pais)
+- [X] Serie temporal (evolucion por pais)
 - [ ] Comparacion (antes/despues de un evento)
 
 ---
 
-## Como ejecutar mi pipeline
+## Como ejecutar mi pipeline  *** PENDIENTE *** 
 
 ```bash
 # Paso 1: Levantar infraestructura
