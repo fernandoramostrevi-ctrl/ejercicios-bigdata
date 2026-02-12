@@ -1,7 +1,18 @@
 # Trabajo Final: "¿La dependencia de recursos petrolíferos está asociada con mayores niveles de corrupción y menor desarrollo humano en Asia Central? Análisis comparativo 2002-2021"
 
 **Alumno:** Fernando Ramos
-**Fecha:** [DD/MM/AAAA]
+**Fecha:** 12/02/2026
+
+---
+
+## 🚀 Resultados Destacados (Executive Summary)
+Para una revisión rápida del proyecto, accede directamente a los entregables finales:
+
+| Entregable | Formato | Descripción |
+|------------|---------|-------------|
+| **[📄 Ver Informe Ejecutivo (PDF)](trabajo_final/plantilla/informes/Dashboard_Analisis_AsiaCentral_Profesional.pdf)** | PDF | Informe gerencial completo con conclusiones y gráficas estáticas. |
+| **[📊 Análisis Detallado (Web)](03_RESULTADOS.md)** | Markdown | Lectura directa en GitHub. Desglose paso a paso de los hallazgos. |
+| **[📈 Dashboard Interactivo (Live)](https://fernandoramostrevi-ctrl.github.io/ejercicios-bigdata/dashboard_asia_central.html)** | Web | *Click para ver online.* Visualización dinámica e interactiva de los datos. |
 
 ---
 
@@ -74,17 +85,58 @@ https://www.gu.se/en/quality-government/qog-data
 
 ---
 
-## Como ejecutar mi pipeline  *** PENDIENTE *** 
+## Como ejecutar mi pipeline
 
+El proyecto consta de una fase de procesamiento con Spark (ETL) y una fase de visualización con Dash/Plotly. Sigue estos pasos para reproducirlo tal exactitud:
+
+### 0. Requisitos previos
+- Tener Docker y Docker Compose instalados
+- Tener Python 3.9+ instalado
+- (Opcional) Crear un entorno virtual:
 ```bash
-# Paso 1: Levantar infraestructura
-docker compose up -d
-
-# Paso 2: Verificar que todo funciona
-docker ps
-
-# Paso 3: Ejecutar pipeline
-python pipeline.py
+python -m venv .venv
+.\.venv\Scripts\activate  # Windows
 ```
 
-[Agrega cualquier instruccion adicional necesaria para reproducir tus resultados]
+### 1. Instalar dependencias
+Instala las librerías necesarias para los scripts locales de visualización:
+```bash
+pip install -r trabajo_final/requirements.txt
+```
+
+### 2. Levantar infraestructura Spark
+Arranca el clúster (Master + Workers) y la base de datos PostgreSQL:
+```bash
+cd trabajo_final/plantilla
+docker compose up -d
+```
+> *Verifica que todo funciona con `docker ps` y accediendo a http://localhost:8080*
+
+### 3. Ejecutar Pipeline ETL (Spark)
+Este script procesa los datos crudos, los limpia y genera los archivos parquet/csv en `trabajo_final/output`.
+```bash
+python trabajo_final/plantilla/scripts/pipeline.py
+```
+
+### 4. Generar Dashboard y Reportes
+Tienes dos opciones para visualizar los resultados:
+
+**Opción A: Generar reportes estáticos (HTML)**
+Genera gráficos individuales y un dashboard HTML completo en la carpeta `output`.
+```bash
+python trabajo_final/plantilla/scripts/dashboard.py
+```
+> *El archivo principal generado será `trabajo_final/output/dashboard_asia_central.html`*
+
+**Opción B: Lanza el Dashboard Interactivo**
+Levanta una aplicación web local con Dash donde puedes explorar los datos dinámicamente.
+```bash
+python trabajo_final/plantilla/scripts/dashboard_interactivo.py
+```
+> *Abre tu navegador en http://127.0.0.1:8050 para ver el dashboard interactivo.*
+
+### 5. Limpieza (Opcional)
+Para detener y eliminar los contenedores al finalizar:
+```bash
+docker compose down
+```
