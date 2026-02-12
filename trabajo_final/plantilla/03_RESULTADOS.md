@@ -8,7 +8,7 @@
 
 ## 3.1 Grafico 1: Recursos Naturales VS Control de Corrupción
 
-![01_recursos_corrupcion.png](../output/01_recursos_corrupcion.png)![Grafico 1](capturas/grafico1.png)
+![Grafico 1: Recursos vs Corrupcion](informes/imagenes/01_recursos_corrupcion.png)
 
 ### Interpretacion
 
@@ -31,7 +31,7 @@ Si tengo muy pocos puntos en mi dataset, el resultado del gráfico no será inte
 Si hay una cantidad grande de puntos en mi dataset, podemos coger una muestra, o jugar con la opacidad de los puntos
 
 Te parece bien esteenfoque? necesitas algo mas que te ayude a realizar el objetivo (graficos standard profesionales para la visualizacion de resultados en bigdata)
-
+```
 
 **Que tuviste que ajustar:**
 [Que cambiaste de lo que te genero la IA para que funcionara o se viera bien]
@@ -40,7 +40,7 @@ espera, los ejemplos que te comparto son unaa referncia visual y de modelo, no h
 
 ## 3.2 Grafico 2: Recursos Naturales vs PIB per cápita
 
-[02_recursos_pib.png](../../../../Downloads/02_recursos_pib.png)(capturas/grafico2.png)
+![Grafico 2: Recursos vs PIB](informes/imagenes/02_recursos_pib.png)
 
 ### Interpretacion
 
@@ -59,6 +59,8 @@ ahora genera un grafico scatter logaritmico con linea de regresion lineal, el ej
 
 ## 3.3 Grafico 3: Evolución del PIB per cápita por país
 
+![Grafico 3: Evolucion PIB](informes/imagenes/03_serie_temporal_pib.png)
+
 ### Interpretacion
 
 Kazajistán mantiene un crecimiento sostenido desde 2000 y post-crisis 2008, alcanzando ~$28k en 2021, mientras Turkmenistán muestra estancamiento tras un crecimiento inicial, y Tayikistán permanece sistemáticamente rezagado (~$3-4k), evidenciando brechas estructurales persistentes. La crisis financiera 2008 genera una inflexión visible pero todos los países recuperan crecimiento, aunque a velocidades distintas.
@@ -70,11 +72,12 @@ Kazajistán mantiene un crecimiento sostenido desde 2000 y post-crisis 2008, alc
 **Tu prompt exacto:**
 ```
 genial, ahora un grafico de serie temporal logaritmico con puntos pequeños representando los años. panel interactivo que permita seleccionar paises individualmente. Destaca en el grafico la crisis del 2008 y anota que no hay datos para turmekistan del 2020 al 2021
-
+```
 
 
 ## 3.4 Grafico 4: Eficiencia de recursos por país
 
+![Grafico 4: Eficiencia Recursos](informes/imagenes/04_barras_eficiencia.png)
 
 ### Interpretacion
 
@@ -88,10 +91,12 @@ En escala logarítmica, Kirguistán (~31,725) y Tayikistán (~30,475) son ~30 ve
 **Tu prompt exacto:**
 ```
 perfecto, ahora un grafico de barras con escaala logaritmica en el eje Y mostrando el valor encima de la barra, con color degradado y valor descendente
+```
 
 
 ## 3.5 Grafico 5: Matriz de correlación
 
+![Grafico 5: Matrix Correlacion](informes/imagenes/05_heatmap_correlacion.png)
 
 ### Interpretacion
 
