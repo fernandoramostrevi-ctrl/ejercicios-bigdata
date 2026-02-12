@@ -10,7 +10,7 @@ Para una revisión rápida del proyecto, accede directamente a los entregables f
 
 | Entregable | Formato | Descripción |
 |------------|---------|-------------|
-| **[📄 Ver Informe Ejecutivo (PDF)](trabajo_final/plantilla/informes/Dashboard_Analisis_AsiaCentral_Profesional.pdf)** | PDF | Informe gerencial completo con conclusiones y gráficas estáticas. |
+| **[📄 Ver Informe Ejecutivo (PDF)](informes/Informe_Ejecutivo_Asia_Central.pdf)** | PDF | Informe gerencial completo con conclusiones y gráficas estáticas. |
 | **[📊 Análisis Detallado (Web)](03_RESULTADOS.md)** | Markdown | Lectura directa en GitHub. Desglose paso a paso de los hallazgos. |
 | **[📈 Dashboard Interactivo (Live)](https://fernandoramostrevi-ctrl.github.io/ejercicios-bigdata/dashboard_asia_central.html)** | Web | *Click para ver online.* Visualización dinámica e interactiva de los datos. |
 

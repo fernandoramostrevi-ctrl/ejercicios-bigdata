@@ -9,8 +9,8 @@
 | Entregable | Enlace | Descripción |
 |------------|--------|-------------|
 | **📈 Dashboard Interactivo** | [**Ver Dashboard en Vivo**](https://fernandoramostrevi-ctrl.github.io/ejercicios-bigdata/dashboard_asia_central.html) | Aplicación interactiva (Dash/Plotly) con los resultados del análisis. |
-| **📄 Informe Ejecutivo** | [**Descargar PDF**](trabajo_final/plantilla/informes/Dashboard_Analisis_AsiaCentral_Profesional.pdf) | Memoria técnica con conclusiones, metodología y visualizaciones. |
-| **📊 Análisis Detallado** | [**Leer en GitHub**](trabajo_final/plantilla/03_RESULTADOS.md) | Documentación técnica del proceso de análisis y hallazgos. |
+| **📄 Informe Ejecutivo** | [**Ver Informe Final (PDF)**](trabajo_final/plantilla/informes/Informe_Ejecutivo_Asia_Central.pdf) | Memoria técnica completa con metodología, hallazgos y conclusiones. |
+| **📊 Resultados (Markdown)** | [**Ver Análisis Detallado**](trabajo_final/plantilla/03_RESULTADOS.md) | Desglose paso a paso de los gráficos e interpretaciones técnicas. |
 
 ---
 
