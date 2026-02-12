@@ -65,6 +65,7 @@ def cargar_datos():
     print("=" * 70)
 
     try:
+        # Leer el archivo parquet
         df = pd.read_parquet(parquet_path)
         print(f"✅ Datos cargados: {len(df)} registros")
         print(f"   Países: {sorted(df['cname'].unique())}")
@@ -72,7 +73,20 @@ def cargar_datos():
         return df
     except Exception as e:
         print(f"❌ ERROR al cargar datos: {e}")
-        exit(1)
+        # Intentar leer desde CSV como fallback
+        print("   Intentando leer desde CSV como fallback...")
+        try:
+            csv_folder = os.path.join(PROCESSED_DIR, "asia_central_processed_csv")
+            csv_files = [f for f in os.listdir(csv_folder) if f.startswith('part-') and f.endswith('.csv')]
+            if not csv_files:
+                raise FileNotFoundError("No se encontraron archivos 'part-*.csv' en la carpeta de salida de Spark.")
+            csv_file_path = os.path.join(csv_folder, csv_files[0])
+            df = pd.read_csv(csv_file_path)
+            print(f"✅ Datos cargados desde CSV: {len(df)} registros")
+            return df
+        except Exception as csv_e:
+            print(f"❌ ERROR al cargar datos desde CSV: {csv_e}")
+            exit(1)
 
 
 # ============================================================================
@@ -182,20 +196,8 @@ def grafico_recursos_corrupcion(df):
         yanchor='bottom',
         font=dict(size=11)
     )
-
-    # Guardar
-    html_path = os.path.join(OUTPUT_DIR, "01_recursos_corrupcion.html")
-    png_path = os.path.join(OUTPUT_DIR, "01_recursos_corrupcion.png")
-
-    fig.write_html(html_path)
-    try:
-        fig.write_image(png_path, width=800, height=500, scale=2)
-        print(f"✅ Guardado PNG: {png_path}")
-    except Exception as e:
-        print(f"⚠️  PNG no guardado (requiere kaleido): {e}")
-
-    print(f"✅ Guardado HTML: {html_path}")
-    print(f"   Correlación: r={corr:.3f}, p={p_value:.4f}")
+    
+    return fig, corr, p_value
 
 
 # ============================================================================
@@ -307,41 +309,34 @@ def grafico_recursos_pib(df):
         yanchor='bottom',
         font=dict(size=11)
     )
-
-    # Guardar
-    html_path = os.path.join(OUTPUT_DIR, "02_recursos_pib.html")
-    png_path = os.path.join(OUTPUT_DIR, "02_recursos_pib.png")
-
-    fig.write_html(html_path)
-    try:
-        fig.write_image(png_path, width=800, height=500, scale=2)
-        print(f"✅ Guardado PNG: {png_path}")
-    except Exception as e:
-        print(f"⚠️  PNG no guardado (requiere kaleido): {e}")
-
-    print(f"✅ Guardado HTML: {html_path}")
-    print(f"   Correlación: r={corr:.3f}, p={p_value:.4f}")
+    
+    return fig, corr, p_value
 
 
 # ============================================================================
 # GRÁFICO 3: SERIE TEMPORAL PIB
 # ============================================================================
 
-def grafico_serie_temporal_pib(df):
+def grafico_serie_temporal_pib(df, countries_to_plot=None, title_suffix=""):
     """
     Serie temporal: Evolución del PIB per cápita por país (2000-2021)
     Objetivo: Mostrar divergencia económica en 20 años
     """
     print("\n" + "=" * 70)
-    print("GRÁFICO 3: Serie Temporal PIB")
+    print(f"GRÁFICO 3: Serie Temporal PIB {title_suffix}")
     print("=" * 70)
+
+    if countries_to_plot:
+        df_plot = df[df['cname'].isin(countries_to_plot)]
+    else:
+        df_plot = df
 
     # Crear figura
     fig = go.Figure()
 
     # Añadir línea por país
-    for pais in sorted(df['cname'].unique()):
-        df_pais = df[df['cname'] == pais].sort_values('year')
+    for pais in sorted(df_plot['cname'].unique()):
+        df_pais = df_plot[df_plot['cname'] == pais].sort_values('year')
 
         # Calcular cambio porcentual año a año
         df_pais = df_pais.copy()
@@ -378,7 +373,7 @@ def grafico_serie_temporal_pib(df):
     # Layout con escala logarítmica
     fig.update_layout(
         title={
-            'text': 'Evolución del PIB per cápita por país<br>' +
+            'text': f'Evolución del PIB per cápita por país {title_suffix}<br>' +
                     '<sub>Asia Central 2000-2021</sub>',
             'x': 0.5,
             'xanchor': 'center',
@@ -423,19 +418,8 @@ def grafico_serie_temporal_pib(df):
         yanchor='bottom',
         font=dict(size=10, color='black')
     )
-
-    # Guardar
-    html_path = os.path.join(OUTPUT_DIR, "03_serie_temporal_pib.html")
-    png_path = os.path.join(OUTPUT_DIR, "03_serie_temporal_pib.png")
-
-    fig.write_html(html_path)
-    try:
-        fig.write_image(png_path, width=800, height=500, scale=2)
-        print(f"✅ Guardado PNG: {png_path}")
-    except Exception as e:
-        print(f"⚠️  PNG no guardado (requiere kaleido): {e}")
-
-    print(f"✅ Guardado HTML: {html_path}")
+    
+    return fig
 
 
 # ============================================================================
@@ -520,57 +504,51 @@ def grafico_barras_eficiencia(df):
         xanchor='center',
         font=dict(size=11)
     )
-
-    # Guardar
-    html_path = os.path.join(OUTPUT_DIR, "04_barras_eficiencia.html")
-    png_path = os.path.join(OUTPUT_DIR, "04_barras_eficiencia.png")
-
-    fig.write_html(html_path)
-    try:
-        fig.write_image(png_path, width=700, height=500, scale=2)
-        print(f"✅ Guardado PNG: {png_path}")
-    except Exception as e:
-        print(f"⚠️  PNG no guardado (requiere kaleido): {e}")
-
-    print(f"✅ Guardado HTML: {html_path}")
+    
+    return fig
 
 
 # ============================================================================
 # GRÁFICO 5: HEATMAP CORRELACIÓN
 # ============================================================================
 
-def grafico_heatmap_correlacion(df):
+def grafico_heatmap_correlacion(df, variables_to_plot=None, title_suffix=""):
     """
     Heatmap: Matriz de correlación entre variables clave
     Objetivo: Visualizar todas las relaciones simultáneamente
     """
     print("\n" + "=" * 70)
-    print("GRÁFICO 5: Matriz de Correlación")
+    print(f"GRÁFICO 5: Matriz de Correlación {title_suffix}")
     print("=" * 70)
 
     # Variables para correlación
-    columnas = [
-        'wdi_totalresrent',
-        'wdi_gdpcapcon2017',
-        'wbgi_cce',
-        'undp_hdi',
-        'brecha_corrupcion_riqueza',
-        'eficiencia_recursos',
-        'indice_bienestar_redistributivo'
-    ]
+    if variables_to_plot:
+        columnas = variables_to_plot
+    else:
+        columnas = [
+            'wdi_totalresrent',
+            'wdi_gdpcapcon2017',
+            'wbgi_cce',
+            'undp_hdi',
+            'brecha_corrupcion_riqueza',
+            'eficiencia_recursos',
+            'indice_bienestar_redistributivo'
+        ]
 
     # Nombres descriptivos cortos
-    nombres_desc = [
-        'Recursos (%PIB)',
-        'PIB per cápita',
-        'Control corrupción',
-        'Desarrollo Humano',
-        'Brecha Gob-Riqueza',
-        'Eficiencia Recursos',
-        'Bienestar Compuesto'
-    ]
+    nombres_desc_map = {
+        'wdi_totalresrent': 'Recursos (%PIB)',
+        'wdi_gdpcapcon2017': 'PIB per cápita',
+        'wbgi_cce': 'Control corrupción',
+        'undp_hdi': 'Desarrollo Humano',
+        'brecha_corrupcion_riqueza': 'Brecha Gob-Riqueza',
+        'eficiencia_recursos': 'Eficiencia Recursos',
+        'indice_bienestar_redistributivo': 'Bienestar Compuesto'
+    }
+    nombres_desc = [nombres_desc_map.get(col, col) for col in columnas]
 
-    # Eliminar filas con nulos en undp_hdi antes de calcular correlación
+
+    # Eliminar filas con nulos en las columnas seleccionadas antes de calcular correlación
     df_clean = df[columnas].dropna()
 
     # Calcular matriz de correlación
@@ -613,7 +591,7 @@ def grafico_heatmap_correlacion(df):
     # Layout
     fig.update_layout(
         title={
-            'text': 'Matriz de Correlación - Variables Clave<br>' +
+            'text': f'Matriz de Correlación - Variables Clave {title_suffix}<br>' +
                     f'<sub>Asia Central 2000-2021 (n={len(df_clean)})</sub>',
             'x': 0.5,
             'xanchor': 'center',
@@ -634,27 +612,8 @@ def grafico_heatmap_correlacion(df):
         height=700,
         margin=dict(l=150, r=100, t=100, b=150)
     )
-
-    # Guardar
-    html_path = os.path.join(OUTPUT_DIR, "05_heatmap_correlacion.html")
-    png_path = os.path.join(OUTPUT_DIR, "05_heatmap_correlacion.png")
-
-    fig.write_html(html_path)
-    try:
-        fig.write_image(png_path, width=700, height=700, scale=2)
-        print(f"✅ Guardado PNG: {png_path}")
-    except Exception as e:
-        print(f"⚠️  PNG no guardado (requiere kaleido): {e}")
-
-    print(f"✅ Guardado HTML: {html_path}")
-
-    # Mostrar correlaciones fuertes
-    print("\n📊 Correlaciones más fuertes (|r| > 0.7):")
-    for i in range(len(corr_matrix)):
-        for j in range(i + 1, len(corr_matrix)):
-            r = corr_matrix.iloc[i, j]
-            if abs(r) > 0.7:
-                print(f"   {nombres_desc[i]:25s} ↔ {nombres_desc[j]:25s}: r={r:.3f}")
+    
+    return fig, corr_matrix
 
 
 # ============================================================================
@@ -669,12 +628,21 @@ if __name__ == "__main__":
     # Cargar datos
     df = cargar_datos()
 
-    # Generar gráficos
-    grafico_recursos_corrupcion(df)
-    grafico_recursos_pib(df)
-    grafico_serie_temporal_pib(df)
-    grafico_barras_eficiencia(df)
-    grafico_heatmap_correlacion(df)
+    # Generar y guardar gráficos
+    fig1, _, _ = grafico_recursos_corrupcion(df)
+    fig1.write_html(os.path.join(OUTPUT_DIR, "01_recursos_corrupcion.html"))
+
+    fig2, _, _ = grafico_recursos_pib(df)
+    fig2.write_html(os.path.join(OUTPUT_DIR, "02_recursos_pib.html"))
+
+    fig3 = grafico_serie_temporal_pib(df)
+    fig3.write_html(os.path.join(OUTPUT_DIR, "03_serie_temporal_pib.html"))
+
+    fig4 = grafico_barras_eficiencia(df)
+    fig4.write_html(os.path.join(OUTPUT_DIR, "04_barras_eficiencia.html"))
+
+    fig5, _ = grafico_heatmap_correlacion(df)
+    fig5.write_html(os.path.join(OUTPUT_DIR, "05_heatmap_correlacion.html"))
 
     # Resumen final
     print("\n" + "=" * 70)
