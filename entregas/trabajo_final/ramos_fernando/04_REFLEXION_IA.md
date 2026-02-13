@@ -124,4 +124,4 @@ Si no usaste IA, captura del recurso web/video que mas te sirvio.
 
 ![Instrucciones_principales.png](Instrucciones_principales.png)![img.png](img.png)![Mi prompt mas importante](capturas/prompt_clave.png)
 
-Como buena praxis a la hora de trabajar con la IA, es fundamental generar y definir instrucciones previas sobre las que basará todas sus respuestas en todos los prompts que hagamos. En este caso, adjunte en un "espacio" de Perplexity los requisitos principales del proyecto final, incluyendo la base de datos, stack tecnolólogico y físico etc. con el fin de dotar del mayor contexto posible a la IA. Esto marca la diferencia a la hora de recibir sus respuestas.
+Como buena praxis a la hora de trabajar con la IA, es fundamental generar y definir instrucciones previas sobre las que basará todas sus respuestas en todos los prompts que hagamos. En este caso, adjunte en un "espacio" de Claude (en Perplexity) los requisitos principales del proyecto final, incluyendo la base de datos, stack tecnolólogico y físico etc. con el fin de dotar del mayor contexto posible a la IA. Esto marca la diferencia a la hora de recibir sus respuestas.

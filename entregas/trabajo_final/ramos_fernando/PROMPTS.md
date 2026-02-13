@@ -2,7 +2,7 @@
 
 **Alumno:** Fernando Ramos
 **Fecha:** 13/02/2026
-**IA utilizada:** Gemini / ChatGPT / Perplexity
+**IA utilizada:** Gemini / ChatGPT / Claude (vía Perplexity)
 
 ---
 
