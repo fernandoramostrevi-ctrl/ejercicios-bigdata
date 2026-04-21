@@ -1,3 +1,12 @@
+# Dashboard Interactivo — Asia Central (2000–2021)
+
+> **Ver dashboard en vivo:** [Dashboard interactivo con Plotly](https://fernandoramostrevi-ctrl.github.io/ejercicios-bigdata/trabajo_final/output/dashboard_asia_central.html)
+
+Pipeline ETL completo con Apache Spark, PostgreSQL y visualización interactiva.  
+Stack: Python · Apache Spark · SQL/PostgreSQL · Docker · Plotly
+
+---
+
 # Trabajo Final: Pipeline de Big Data con Infraestructura Docker
 
 **Curso:** Big Data con Python - Prof. Juan Marcelo Gutierrez Miranda (@TodoEconometria)
